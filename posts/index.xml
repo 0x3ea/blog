@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on A minimal Hugo website</title><link>https://0x3ea.github.io/blog/posts/</link><description>Recent content in Posts on A minimal Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 01 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://0x3ea.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Vim常用命令</title><link>https://0x3ea.github.io/blog/posts/vim/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/vim/</guid><description>&lt;p&gt;G: 跳到最底端&lt;/p&gt;
+&lt;p&gt;gg: 跳到最顶端&lt;/p&gt;
+&lt;p&gt;?关键字: 按关键字筛选&lt;/p&gt;
+&lt;p&gt;n: 查找下一个&lt;/p&gt;
+&lt;p&gt;shift+n: 查找上一个&lt;/p&gt;
+&lt;p&gt;:set nu 显示行号&lt;/p&gt;
+&lt;p&gt;:100 跳转到第100行&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.github.io/blog/posts/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;类型&lt;/th&gt;
+ &lt;th&gt;传值方式&lt;/th&gt;
+ &lt;th&gt;能修改原数据?&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;int, float, string&lt;/td&gt;
+ &lt;td&gt;拷贝值&lt;/td&gt;
+ &lt;td&gt;需要传指针&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;array&lt;/td&gt;
+ &lt;td&gt;拷贝整个数组&lt;/td&gt;
+ &lt;td&gt;需要传指针&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;struct&lt;/td&gt;
+ &lt;td&gt;拷贝结构体&lt;/td&gt;
+ &lt;td&gt;需要传指针&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;pointer&lt;/td&gt;
+ &lt;td&gt;拷贝地址&lt;/td&gt;
+ &lt;td&gt;通过指针修改&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;slice&lt;/td&gt;
+ &lt;td&gt;拷贝头部&lt;/td&gt;
+ &lt;td&gt;可修改元素，append 不影响&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;map&lt;/td&gt;
+ &lt;td&gt;拷贝指针&lt;/td&gt;
+ &lt;td&gt;可以&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;channel&lt;/td&gt;
+ &lt;td&gt;拷贝引用&lt;/td&gt;
+ &lt;td&gt;可以&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;为什么 &lt;code&gt;slice&lt;/code&gt; 的 &lt;code&gt;append&lt;/code&gt; 不影响?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;slice&lt;/code&gt; 包括三部分:指针,长度,容量&lt;/p&gt;
+&lt;p&gt;传参时拷贝了这三部分，函数内 &lt;code&gt;append&lt;/code&gt; 不会影响这三部分&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-go"&gt;func f(p []int) {
+	p = append(p, 1)
+}
+
+func main() {
+	var q = []int{1, 2, 3}
+	f(q)
+	fmt.Println(len(q))
+	fmt.Println(cap(q))
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id="包package"&gt;包(package)&lt;/h1&gt;
+&lt;h1 id="导出规则"&gt;导出规则&lt;/h1&gt;
+&lt;p&gt;Go 中所有标识符（变量、常量、函数、类型、方法）的可见性规则：&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;首字母&lt;/th&gt;
+ &lt;th&gt;可见性&lt;/th&gt;
+ &lt;th&gt;示例&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;大写&lt;/td&gt;
+ &lt;td&gt;公开（导出）&lt;/td&gt;
+ &lt;td&gt;IssuesURL&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;小写&lt;/td&gt;
+ &lt;td&gt;私有（未导出）&lt;/td&gt;
+ &lt;td&gt;issuesURL&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;</description></item></channel></rss>
