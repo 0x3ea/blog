@@ -21,7 +21,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id="e智乃的最大子段和取模"&gt;E.智乃的最大子段和取模&lt;/h1&gt;
-&lt;pre&gt;&lt;code class="language-cpp"&gt;void solve() {
+&lt;pre&gt;&lt;code&gt;void solve() {
  int n, p;
  cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; p;
  vector&amp;lt;ll&amp;gt; a(n + 1), s(n + 1);
@@ -54,7 +54,7 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id="f智乃的算法竞赛群友"&gt;F.智乃的算法竞赛群友&lt;/h1&gt;
-&lt;pre&gt;&lt;code class="language-cpp"&gt;void solve() {
+&lt;pre&gt;&lt;code&gt;void solve() {
  ll n, a, b;
  cin &amp;gt;&amp;gt; n &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b;
  auto cal = [&amp;amp;](ll x) -&amp;gt; ll {
@@ -77,6 +77,4 @@
  }
  cout &amp;lt;&amp;lt; ans &amp;lt;&amp;lt; endl;
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h1 id="g智乃的箭头魔术"&gt;G.智乃的箭头魔术&lt;/h1&gt;
-&lt;pre&gt;&lt;code class="language-cpp"&gt;&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;</description></item></channel></rss>
