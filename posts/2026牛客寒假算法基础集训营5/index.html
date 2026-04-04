@@ -1,0 +1,75 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>2026牛客寒假算法基础集训营5 | A minimal Hugo website</title><link rel=stylesheet href=/blog/css/style.css><link rel=stylesheet href=/blog/css/fonts.css></head><body><nav><ul class=menu><li><a href=/blog/>Home</a></li><li><a href=/blog/about/>About</a></li><li><a href=/blog/categories/>Categories</a></li><li><a href=/blog/tags/>Tags</a></li><li><a href=/blog/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>2026牛客寒假算法基础集训营5</span></h1><h2 class=date>2026/02/16</h2></div><main><h1 id=b智乃的瓷砖>B.智乃的瓷砖</h1><pre><code class=language-cpp>void solve() {
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+    vector&lt;vector&lt;char&gt;&gt; a(n + 3, vector&lt;char&gt;(m + 3));
+    auto draw = [&amp;](int x, int y) -&gt; void {
+        a[x][y] = '/';
+        a[x][y + 1] = '\\';
+        a[x + 1][y] = '\\';
+        a[x + 1][y + 1] = '/';
+    };
+    for (int i = 1; i &lt;= n; i += 2)
+        for (int j = 1; j &lt;= m; j += 2) {
+            draw(i, j);
+        }
+    for (int i = 1; i &lt;= n; i++) {
+        for (int j = 1; j &lt;= m; j++)
+            cout &lt;&lt; a[i][j];
+        cout &lt;&lt; endl;
+    }
+}
+</code></pre><h1 id=e智乃的最大子段和取模>E.智乃的最大子段和取模</h1><pre><code class=language-cpp>void solve() {
+    int n, p;
+    cin &gt;&gt; n &gt;&gt; p;
+    vector&lt;ll&gt; a(n + 1), s(n + 1);
+    for (int i = 1; i &lt;= n; i++) {
+        cin &gt;&gt; a[i];
+        s[i] = (s[i - 1] + a[i]) % p;
+    }
+    // cout &lt;&lt; endl;
+    set&lt;pll&gt; st;
+    st.insert({0, 0});
+    int ans = -1;
+    int l, r;
+    for (int i = 1; i &lt;= n; i++) {
+        auto [val, pos] = *st.begin();
+        ll res = (s[i] - val + p) % p;
+        if (res &gt; ans) {
+            ans = res, l = pos + 1, r = i;
+        }
+        auto it = st.upper_bound({s[i], 0});
+        if (it != st.end()) {
+            auto [val1, pos1] = *st.upper_bound({s[i], 0});
+            res = (s[i] - val1 + p) % p;
+            if (res &gt; ans) {
+                ans = res, l = pos1 + 1, r = i;
+            }
+        }
+        st.insert({s[i], i});
+    }
+    cout &lt;&lt; l - 1 &lt;&lt; &quot; &quot; &lt;&lt; r - 1 &lt;&lt; &quot; &quot; &lt;&lt; ans &lt;&lt; endl;
+}
+</code></pre><h1 id=f智乃的算法竞赛群友>F.智乃的算法竞赛群友</h1><pre><code class=language-cpp>void solve() {
+    ll n, a, b;
+    cin &gt;&gt; n &gt;&gt; a &gt;&gt; b;
+    auto cal = [&amp;](ll x) -&gt; ll {
+        int t = min(n - 7 * x, x);
+        t += (n - 7 * x - t) / 2;
+        return x * a + t * b;
+    };
+    int l = 0, r = n / 7;
+    while (l + 5 &lt; r) {
+        int lmid = l + (r - l) / 3;
+        int rmid = r - (r - l) / 3;
+        if (cal(lmid) &lt;= cal(rmid))
+            l = lmid + 1;
+        else
+            r = rmid - 1;
+    }
+    ll ans = 0;
+    for (int i = l; i &lt;= r; i++) {
+        ans = max(ans, cal(i));
+    }
+    cout &lt;&lt; ans &lt;&lt; endl;
+}
+</code></pre><h1 id=g智乃的箭头魔术>G.智乃的箭头魔术</h1><pre><code class=language-cpp></code></pre></main><footer><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
