@@ -34,7 +34,9 @@ params:
 
 markup:
   highlight:
-    codeFences: false
+    codeFences: true
+    style: github
+    noClasses: false
   goldmark:
     renderer:
       unsafe: true
