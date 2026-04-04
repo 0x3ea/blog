@@ -28,6 +28,7 @@ pre {
   box-shadow: 5px 5px 5px #eee;
   padding: 1em;
   overflow-x: auto;
+  border-radius: 5px;
 }
 code { background: #f9f9f9; }
 pre code { background: none; }
