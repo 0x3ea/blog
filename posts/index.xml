@@ -31,6 +31,22 @@
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;学习资源：&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Git</title><link>https://0x3ea.github.io/blog/posts/git/</link><pubDate>Sun, 05 Apr 2026 00:04:24 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/git/</guid><description>&lt;h1 id="worktree"&gt;worktree&lt;/h1&gt;
 &lt;p&gt;从同一仓库同时检出多个分支到不同的目录&lt;/p&gt;
+&lt;p&gt;假如你需要一边在 &lt;code&gt;main&lt;/code&gt; 上修 &lt;code&gt;bug&lt;/code&gt;,一边在 &lt;code&gt;feature&lt;/code&gt; 上开发,如果没有 &lt;code&gt;worktree&lt;/code&gt; 就需要来回切换分支，如果忘了提交&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;# 创建一个 worktree，基于 main 分支，放到 ../hotfix 目录
+git worktree add ../hotfix main
+
+# 创建一个 worktree 并新建分支
+git worktree add -b feature-x ../feature-x main
+
+# 列出所有worktree
+git worktree list
+
+# 用完后删除
+git worktree remove ../hotfix
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;与 &lt;code&gt;git clone&lt;/code&gt; 相比：&lt;/p&gt;
+&lt;p&gt;使用同一个仓库,分支/提交互通，磁盘占用相对较小（共享对象）&lt;/p&gt;
+&lt;p&gt;与 &lt;code&gt;git switch&lt;/code&gt; 相比：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git switch&lt;/code&gt;切换分支时工作区会被完全替换，如果有未提交的改动可能丢失或冲突&lt;/p&gt;
 &lt;h1 id="同步"&gt;同步&lt;/h1&gt;
 &lt;p&gt;本地一个目录下只能有一个仓库(.git)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;一个本地仓库&lt;/strong&gt; 可以绑定 &lt;strong&gt;多个远程地址&lt;/strong&gt;&lt;/p&gt;
@@ -45,7 +61,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git log --graph &lt;span class="c1"&gt;# 用 ASCII 字符画出分支合并图&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull orgin/main &lt;span class="c1"&gt;# git fetch orgin/main + git merge orgin/main&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 注意merge的时候要让本地和远程分支对应&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Vim常用命令</title><link>https://0x3ea.github.io/blog/posts/vim/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/vim/</guid><description>&lt;p&gt;G: 跳到最底端&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="stash"&gt;stash&lt;/h1&gt;
+&lt;p&gt;git stash 把你当前未提交的更改（工作区和暂存区）临时藏起来，让工作区恢复到干净状态。这样你就可以安全地 git pull 拉取远程更新。git stash pop 再把之前藏起来的更改恢复回来。&lt;/p&gt;</description></item><item><title>Vim常用命令</title><link>https://0x3ea.github.io/blog/posts/vim/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/vim/</guid><description>&lt;p&gt;G: 跳到最底端&lt;/p&gt;
 &lt;p&gt;gg: 跳到最顶端&lt;/p&gt;
 &lt;p&gt;?关键字: 按关键字筛选&lt;/p&gt;
 &lt;p&gt;n: 查找下一个&lt;/p&gt;

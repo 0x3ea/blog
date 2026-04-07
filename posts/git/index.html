@@ -1,4 +1,15 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Git | A minimal Hugo website</title><link rel=stylesheet href=/blog/css/style.css><link rel=stylesheet href=/blog/css/fonts.css><link rel=stylesheet href=/blog/css/syntax.css></head><body><nav><ul class=menu><li><a href=/blog/>Home</a></li><li><a href=/blog/about/>About</a></li><li><a href=/blog/categories/>Categories</a></li><li><a href=/blog/tags/>Tags</a></li><li><a href=/blog/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>Git</span></h1><h2 class=date>2026/04/05</h2></div><main><h1 id=worktree>worktree</h1><p>从同一仓库同时检出多个分支到不同的目录</p><h1 id=同步>同步</h1><p>本地一个目录下只能有一个仓库(.git)</p><p><strong>一个本地仓库</strong> 可以绑定 <strong>多个远程地址</strong></p><p>比如你fork了一个项目(origin),开发了自己版本,上传了自己的版本到github(upstream),别人修改了你的版本,这时你的本地仓库就绑定了多个远程</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>git fetch <span class=c1>#fetch 所有远程</span>
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Git | A minimal Hugo website</title><link rel=stylesheet href=/blog/css/style.css><link rel=stylesheet href=/blog/css/fonts.css><link rel=stylesheet href=/blog/css/syntax.css></head><body><nav><ul class=menu><li><a href=/blog/>Home</a></li><li><a href=/blog/about/>About</a></li><li><a href=/blog/categories/>Categories</a></li><li><a href=/blog/tags/>Tags</a></li><li><a href=/blog/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>Git</span></h1><h2 class=date>2026/04/05</h2></div><main><h1 id=worktree>worktree</h1><p>从同一仓库同时检出多个分支到不同的目录</p><p>假如你需要一边在 <code>main</code> 上修 <code>bug</code>,一边在 <code>feature</code> 上开发,如果没有 <code>worktree</code> 就需要来回切换分支，如果忘了提交</p><pre tabindex=0><code># 创建一个 worktree，基于 main 分支，放到 ../hotfix 目录
+git worktree add ../hotfix main
+
+# 创建一个 worktree 并新建分支
+git worktree add -b feature-x ../feature-x main
+
+# 列出所有worktree
+git worktree list
+
+# 用完后删除
+git worktree remove ../hotfix
+</code></pre><p>与 <code>git clone</code> 相比：</p><p>使用同一个仓库,分支/提交互通，磁盘占用相对较小（共享对象）</p><p>与 <code>git switch</code> 相比：</p><p><code>git switch</code>切换分支时工作区会被完全替换，如果有未提交的改动可能丢失或冲突</p><h1 id=同步>同步</h1><p>本地一个目录下只能有一个仓库(.git)</p><p><strong>一个本地仓库</strong> 可以绑定 <strong>多个远程地址</strong></p><p>比如你fork了一个项目(origin),开发了自己版本,上传了自己的版本到github(upstream),别人修改了你的版本,这时你的本地仓库就绑定了多个远程</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>git fetch <span class=c1>#fetch 所有远程</span>
 </span></span><span class=line><span class=cl>git fetch origin <span class=c1>#只 fetch origin</span>
 </span></span><span class=line><span class=cl>git log <span class=c1>#查看当前分支的所有历史</span>
 </span></span><span class=line><span class=cl>git log origin/main <span class=c1>#查看远程main分支的所有历史</span>
@@ -8,4 +19,4 @@
 </span></span><span class=line><span class=cl>git log --graph <span class=c1># 用 ASCII 字符画出分支合并图</span>
 </span></span><span class=line><span class=cl>git pull orgin/main <span class=c1># git fetch orgin/main + git merge orgin/main</span>
 </span></span><span class=line><span class=cl><span class=c1># 注意merge的时候要让本地和远程分支对应</span>
-</span></span></code></pre></div></main><footer><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
+</span></span></code></pre></div><h1 id=stash>stash</h1><p>git stash 把你当前未提交的更改（工作区和暂存区）临时藏起来，让工作区恢复到干净状态。这样你就可以安全地 git pull 拉取远程更新。git stash pop 再把之前藏起来的更改恢复回来。</p><p>简单说就是：临时保存你的改动，腾出空间来拉代码</p></main><footer><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
