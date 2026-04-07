@@ -19,4 +19,7 @@ git worktree remove ../hotfix
 </span></span><span class=line><span class=cl>git log --graph <span class=c1># 用 ASCII 字符画出分支合并图</span>
 </span></span><span class=line><span class=cl>git pull orgin/main <span class=c1># git fetch orgin/main + git merge orgin/main</span>
 </span></span><span class=line><span class=cl><span class=c1># 注意merge的时候要让本地和远程分支对应</span>
-</span></span></code></pre></div><h1 id=stash>stash</h1><p>git stash 把你当前未提交的更改（工作区和暂存区）临时藏起来，让工作区恢复到干净状态。这样你就可以安全地 git pull 拉取远程更新。git stash pop 再把之前藏起来的更改恢复回来。</p><p>简单说就是：临时保存你的改动，腾出空间来拉代码</p></main><footer><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
+</span></span></code></pre></div><h1 id=stash>stash</h1><p>git stash 把你当前未提交的更改（工作区和暂存区）临时藏起来，让工作区恢复到干净状态。这样你就可以安全地 git pull 拉取远程更新。git stash pop 再把之前藏起来的更改恢复回来。</p><p>简单说就是：临时保存你的改动，腾出空间来拉代码</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>git stash list <span class=c1># 查看stash</span>
+</span></span><span class=line><span class=cl>git stash drop <span class=c1># 丢弃最顶部的一条</span>
+</span></span><span class=line><span class=cl>git stash clear <span class=c1># 清空所有stash</span>
+</span></span></code></pre></div></main><footer><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
