@@ -59,3 +59,9 @@ git pull orgin/main # git fetch orgin/main + git merge orgin/main
 git stash 把你当前未提交的更改（工作区和暂存区）临时藏起来，让工作区恢复到干净状态。这样你就可以安全地 git pull 拉取远程更新。git stash pop 再把之前藏起来的更改恢复回来。
 
 简单说就是：临时保存你的改动，腾出空间来拉代码
+
+```shell
+git stash list # 查看stash
+git stash drop # 丢弃最顶部的一条
+git stash clear # 清空所有stash
+```
