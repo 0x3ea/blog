@@ -29,3 +29,26 @@ git log --graph # 用 ASCII 字符画出分支合并图
 git pull orgin/main # git fetch orgin/main + git merge orgin/main
 # 注意merge的时候要让本地和远程分支对应
 ```
+假如你需要一边在 `main` 上修 `bug`,一边在 `feature` 上开发,如果没有 `worktree` 就需要来回切换分支，如果忘了提交
+
+```
+# 创建一个 worktree，基于 main 分支，放到 ../hotfix 目录
+git worktree add ../hotfix main
+
+# 创建一个 worktree 并新建分支
+git worktree add -b feature-x ../feature-x main
+
+# 列出所有worktree
+git worktree list
+
+# 用完后删除
+git worktree remove ../hotfix
+```
+
+与 `git clone` 相比：
+
+使用同一个仓库,分支/提交互通，磁盘占用相对较小（共享对象）
+
+与 `git switch` 相比：
+
+`git switch`切换分支时工作区会被完全替换，如果有未提交的改动可能丢失或冲突
