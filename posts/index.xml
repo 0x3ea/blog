@@ -1,10 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on A minimal Hugo website</title><link>https://0x3ea.github.io/blog/posts/</link><description>Recent content in Posts on A minimal Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 07 Apr 2026 23:24:18 +0800</lastBuildDate><atom:link href="https://0x3ea.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>CS144-Lab0</title><link>https://0x3ea.github.io/blog/posts/cs144-lab0/</link><pubDate>Tue, 07 Apr 2026 23:24:18 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/cs144-lab0/</guid><description>&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 通过 DNS 解析拿到 IP → 建立 TCP 连接&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;telnet cs144.keithw.org http 
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on A minimal Hugo website</title><link>https://0x3ea.github.io/blog/posts/</link><description>Recent content in Posts on A minimal Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Tue, 07 Apr 2026 23:24:18 +0800</lastBuildDate><atom:link href="https://0x3ea.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>CS144-Lab0</title><link>https://0x3ea.github.io/blog/posts/cs144-lab0/</link><pubDate>Tue, 07 Apr 2026 23:24:18 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/cs144-lab0/</guid><description>&lt;h1 id="31-fetch-a-web-page"&gt;3.1 Fetch a Web page&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 通过 DNS 解析拿到 IP → 建立 TCP 连接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;telnet cs144.keithw.org http
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /lab0/123456 HTTP/1.1
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 访问IP(服务器)的cs144.keithw.org域名（一台服务器可能托管多个域名）&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Host: cs144.keithw.org
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Connection: close
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>web</title><link>https://0x3ea.github.io/blog/posts/purrfect-puzzling-nova/</link><pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/purrfect-puzzling-nova/</guid><description>&lt;h1 id="计算机网络系统学习计划实验驱动版"&gt;计算机网络系统学习计划（实验驱动版）&lt;/h1&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="33-listening-and-connecting"&gt;3.3 Listening and connecting&lt;/h1&gt;
+&lt;p&gt;在本地建立一个简单的 &lt;code&gt;server&lt;/code&gt; 和 &lt;code&gt;client&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;netcat-v-l-p &lt;span class="m"&gt;9090&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;telnet localhost &lt;span class="m"&gt;9090&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;数据报(Internet datagrams)&lt;/p&gt;
+&lt;p&gt;底层的互联网的实现并不是telnet-netcat这样的字节流,而是数据表,这种方式并不可靠,可能会出现:&lt;/p&gt;
+&lt;p&gt;丢失 - 数据报在传输途中消失
+乱序 - 后发的先到，先发的后到
+损坏 - 内容被修改（虽然很少见）
+重复 - 同一个数据报收到多次&lt;/p&gt;</description></item><item><title>web</title><link>https://0x3ea.github.io/blog/posts/purrfect-puzzling-nova/</link><pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/purrfect-puzzling-nova/</guid><description>&lt;h1 id="计算机网络系统学习计划实验驱动版"&gt;计算机网络系统学习计划（实验驱动版）&lt;/h1&gt;
 &lt;h2 id="-context"&gt;📋 Context&lt;/h2&gt;
 &lt;p&gt;针对&lt;strong&gt;有基础学习者&lt;/strong&gt;定制的实验驱动型学习计划，每周5-10小时，以Stanford CS144为核心，通过从零实现TCP/IP协议栈来系统掌握计算机网络知识。&lt;/p&gt;
 &lt;h2 id="-学习目标"&gt;🎯 学习目标&lt;/h2&gt;
