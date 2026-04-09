@@ -25,10 +25,21 @@ cp -r ../public/* .
 
 echo "💾 提交更改..."
 git add -A
-git commit -m "Deploy $(date '+%Y-%m-%d %H:%M:%S')" --allow-empty
-
-echo "🚀 推送到 GitHub..."
-git push origin "$BRANCH"
+if ! git diff --cached --quiet; then
+    git commit -m "Deploy $(date '+%Y-%m-%d %H:%M:%S')"
+    echo "🚀 推送到 GitHub..."
+    if ! git push origin "$BRANCH"; then
+        echo "❌ 推送失败！回滚 commit..."
+        git reset HEAD~1
+        exit 1
+    fi
+else
+    echo "⏭️  无内容变更，跳过部署"
+    cd ..
+    git worktree remove "$DEPLOY_DIR" --force
+    rm -rf public
+    exit 0
+fi
 
 echo "🔙 清理..."
 cd ..
