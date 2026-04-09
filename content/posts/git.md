@@ -65,3 +65,30 @@ git stash list # 查看stash
 git stash drop # 丢弃最顶部的一条
 git stash clear # 清空所有stash
 ```
+
+# 工作区,暂存区,本地仓库
+
+编辑文件(工作区) ──→ git add ──→ 暂存区 ──→ git commit ──→ 本地仓库
+   ↑                                                                                                  │
+   └──────────── git checkout/restore ─────────────┘
+
+# git回退
+
+##  修改+未提交
+
+`git checkout --.` 或`git restore .`
+
+ ## 新建+未提交
+
+`git checkout --.` 或`git clean -fd`
+
+`-f` = force（强制），`-d` = 包含目录
+
+最好先通过`git clean -n`或`git clean --dry-run`来查看会删除哪些
+
+## 已提交
+
+`git reset`
+
+`--soft`（保留修改到暂存区）、`--mixed`（保留到工作区）、`--hard`（完全丢弃）
+

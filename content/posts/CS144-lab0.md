@@ -32,3 +32,86 @@ telnet localhost 9090
 乱序 - 后发的先到，先发的后到
 损坏 - 内容被修改（虽然很少见）
 重复 - 同一个数据报收到多次
+
+```cpp
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
+
+int main() {
+    // 1. 创建 socket
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0) {
+        perror("socket");
+        return 1;
+    }
+
+    // 2. 解析域名并连接服务器
+    struct addrinfo hints = {0}, *res;
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+
+    if (getaddrinfo("cs144.keithw.org", "80", &hints, &res) != 0) {
+        perror("getaddrinfo");
+        return 1;
+    }
+
+    if (connect(sockfd, res->ai_addr, res->ai_addrlen) < 0) {
+        perror("connect");
+        freeaddrinfo(res);
+        return 1;
+    }
+    freeaddrinfo(res);
+
+    // 3. 发送 HTTP 请求
+    char *request = "GET /hello HTTP/1.1\r\n"
+                    "Host: cs144.keithw.org\r\n"
+                    "Connection: close\r\n"
+                    "\r\n";
+
+    if (send(sockfd, request, strlen(request), 0) < 0) {
+        perror("send");
+        return 1;
+    }
+
+    // 4. 接收响应
+    char buffer[4096];
+    int bytes_received;
+    while ((bytes_received = recv(sockfd, buffer, sizeof(buffer) - 1, 0)) > 0) {
+        buffer[bytes_received] = '\0';
+        printf("%s", buffer);
+    }
+
+    // 5. 关闭连接
+    close(sockfd);
+
+    return 0;
+}
+```
+
+```cpp
+void get_URL(const string &host, const string &path) {
+    cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
+    TCPSocket socket = TCPSocket();
+    Address address = Address(host, "http");
+    socket.connect(address);
+    string requset = "GET /hello HTTP/1.1\r\n"
+                     "Host: cs144.keithw.org\r\n"
+                     "Connection: close\r\n"
+                     "\r\n";
+    socket.write(requset);
+    string response;
+    while (!socket.eof()) {
+        string buffer = "";
+        socket.read(buffer);
+        response += buffer;
+    }
+    std::cout << "receive meeage: " << response << "\r\n";
+    socket.close();
+}
+```
