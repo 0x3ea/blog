@@ -9,4 +9,81 @@
 </span></span></code></pre></div><p>数据报(Internet datagrams)</p><p>底层的互联网的实现并不是telnet-netcat这样的字节流,而是数据表,这种方式并不可靠,可能会出现:</p><p>丢失 - 数据报在传输途中消失
 乱序 - 后发的先到，先发的后到
 损坏 - 内容被修改（虽然很少见）
-重复 - 同一个数据报收到多次</p></main><footer><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
+重复 - 同一个数据报收到多次</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;arpa/inet.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;netdb.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;netinet/in.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;string.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;sys/socket.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 1. 创建 socket
+</span></span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>sockfd</span> <span class=o>=</span> <span class=n>socket</span><span class=p>(</span><span class=n>AF_INET</span><span class=p>,</span> <span class=n>SOCK_STREAM</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>sockfd</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>perror</span><span class=p>(</span><span class=s>&#34;socket&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 2. 解析域名并连接服务器
+</span></span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=nc>addrinfo</span> <span class=n>hints</span> <span class=o>=</span> <span class=p>{</span><span class=mi>0</span><span class=p>},</span> <span class=o>*</span><span class=n>res</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>hints</span><span class=p>.</span><span class=n>ai_family</span> <span class=o>=</span> <span class=n>AF_INET</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>hints</span><span class=p>.</span><span class=n>ai_socktype</span> <span class=o>=</span> <span class=n>SOCK_STREAM</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>getaddrinfo</span><span class=p>(</span><span class=s>&#34;cs144.keithw.org&#34;</span><span class=p>,</span> <span class=s>&#34;80&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>hints</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>res</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>perror</span><span class=p>(</span><span class=s>&#34;getaddrinfo&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>connect</span><span class=p>(</span><span class=n>sockfd</span><span class=p>,</span> <span class=n>res</span><span class=o>-&gt;</span><span class=n>ai_addr</span><span class=p>,</span> <span class=n>res</span><span class=o>-&gt;</span><span class=n>ai_addrlen</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>perror</span><span class=p>(</span><span class=s>&#34;connect&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>freeaddrinfo</span><span class=p>(</span><span class=n>res</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>freeaddrinfo</span><span class=p>(</span><span class=n>res</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 3. 发送 HTTP 请求
+</span></span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>request</span> <span class=o>=</span> <span class=s>&#34;GET /hello HTTP/1.1</span><span class=se>\r\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                    <span class=s>&#34;Host: cs144.keithw.org</span><span class=se>\r\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                    <span class=s>&#34;Connection: close</span><span class=se>\r\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                    <span class=s>&#34;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>send</span><span class=p>(</span><span class=n>sockfd</span><span class=p>,</span> <span class=n>request</span><span class=p>,</span> <span class=n>strlen</span><span class=p>(</span><span class=n>request</span><span class=p>),</span> <span class=mi>0</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>perror</span><span class=p>(</span><span class=s>&#34;send&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 4. 接收响应
+</span></span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>buffer</span><span class=p>[</span><span class=mi>4096</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>bytes_received</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>((</span><span class=n>bytes_received</span> <span class=o>=</span> <span class=n>recv</span><span class=p>(</span><span class=n>sockfd</span><span class=p>,</span> <span class=n>buffer</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>buffer</span><span class=p>)</span> <span class=o>-</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>))</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>buffer</span><span class=p>[</span><span class=n>bytes_received</span><span class=p>]</span> <span class=o>=</span> <span class=sc>&#39;\0&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=n>buffer</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 5. 关闭连接
+</span></span></span><span class=line><span class=cl>    <span class=n>close</span><span class=p>(</span><span class=n>sockfd</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>void</span> <span class=nf>get_URL</span><span class=p>(</span><span class=k>const</span> <span class=n>string</span> <span class=o>&amp;</span><span class=n>host</span><span class=p>,</span> <span class=k>const</span> <span class=n>string</span> <span class=o>&amp;</span><span class=n>path</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>cerr</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;Function called: get_URL(&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>host</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;, &#34;</span> <span class=o>&lt;&lt;</span> <span class=n>path</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;)</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>TCPSocket</span> <span class=n>socket</span> <span class=o>=</span> <span class=n>TCPSocket</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>Address</span> <span class=n>address</span> <span class=o>=</span> <span class=n>Address</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=s>&#34;http&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>socket</span><span class=p>.</span><span class=n>connect</span><span class=p>(</span><span class=n>address</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>string</span> <span class=n>requset</span> <span class=o>=</span> <span class=s>&#34;GET /hello HTTP/1.1</span><span class=se>\r\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                     <span class=s>&#34;Host: cs144.keithw.org</span><span class=se>\r\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                     <span class=s>&#34;Connection: close</span><span class=se>\r\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>                     <span class=s>&#34;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>socket</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>requset</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>string</span> <span class=n>response</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=n>socket</span><span class=p>.</span><span class=n>eof</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>string</span> <span class=n>buffer</span> <span class=o>=</span> <span class=s>&#34;&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>socket</span><span class=p>.</span><span class=n>read</span><span class=p>(</span><span class=n>buffer</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>response</span> <span class=o>+=</span> <span class=n>buffer</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;receive meeage: &#34;</span> <span class=o>&lt;&lt;</span> <span class=n>response</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;</span><span class=se>\r\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>socket</span><span class=p>.</span><span class=n>close</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div></main><footer><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
