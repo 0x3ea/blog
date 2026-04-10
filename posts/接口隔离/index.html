@@ -24,7 +24,8 @@
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=k>static_assert</span><span class=p>(</span> <span class=k>sizeof</span><span class=p>(</span> <span class=n>Reader</span> <span class=p>)</span> <span class=o>==</span> <span class=k>sizeof</span><span class=p>(</span> <span class=n>ByteStream</span> <span class=p>),</span>
 </span></span><span class=line><span class=cl>                 <span class=s>&#34;Please add member variables to the ByteStream base, not the ByteStream Reader.&#34;</span> <span class=p>);</span>
-</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>//static_assert 确保 Reader 只是&#34;视图&#34;而非独立类——它不能有额外的成员变量
+</span></span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=k>static_cast</span><span class=o>&lt;</span><span class=n>Reader</span><span class=o>&amp;&gt;</span><span class=p>(</span> <span class=o>*</span><span class=k>this</span> <span class=p>);</span> <span class=c1>// NOLINT(*-downcast)
 </span></span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></div><p>返回的 <code>Reader</code> 对象内部实际引用的是同一个 <code>ByteStream</code>。也就是说，<code>Writer</code> 和 <code>Reader</code> 都是 <code>ByteStream</code> 的一部分——两者共享来自父类的函数，同时各自拥有独有的方法。</p><h1 id=设计优势>设计优势</h1><p>这样设计的理由如下：</p><h3 id=1-共享状态>1. 共享状态</h3><p>Reader 和 Writer 操作的是同一个缓冲区，只是提供不同的访问接口。</p><h3 id=2-接口隔离>2. 接口隔离</h3><p>每个接口只暴露相关的方法，保证了职责单一。</p><h3 id=3-避免菱形继承>3. 避免菱形继承</h3><p>如果使用继承来实现类似功能，会形成菱形继承结构：</p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>graph TD
