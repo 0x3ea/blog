@@ -1,0 +1,53 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>接口隔离 | A minimal Hugo website</title><link rel=stylesheet href=/blog/css/style.css><link rel=stylesheet href=/blog/css/fonts.css><link rel=stylesheet href=/blog/css/syntax.css></head><body><nav><ul class=menu><li><a href=/blog/>Home</a></li><li><a href=/blog/about/>About</a></li><li><a href=/blog/categories/>Categories</a></li><li><a href=/blog/tags/>Tags</a></li><li><a href=/blog/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>接口隔离</span></h1><h2 class=date>2026/04/10</h2></div><main><h1 id=背景>背景</h1><p>起因是在写 CS144 的 lab0 时，看了一下 <code>ByteStream</code> 的声明（删去了一些无关的函数）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=k>class</span> <span class=nc>Reader</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Writer</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>ByteStream</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=k>public</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>  <span class=k>explicit</span> <span class=n>ByteStream</span><span class=p>(</span> <span class=kt>uint64_t</span> <span class=n>capacity</span> <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>Reader</span><span class=o>&amp;</span> <span class=n>reader</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>const</span> <span class=n>Reader</span><span class=o>&amp;</span> <span class=n>reader</span><span class=p>()</span> <span class=k>const</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>Writer</span><span class=o>&amp;</span> <span class=n>writer</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>const</span> <span class=n>Writer</span><span class=o>&amp;</span> <span class=n>writer</span><span class=p>()</span> <span class=k>const</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>protected</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// Please add any additional state to the ByteStream here, and not to the Writer and Reader interfaces.
+</span></span></span><span class=line><span class=cl>  <span class=kt>uint64_t</span> <span class=n>capacity_</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kt>bool</span> <span class=n>error_</span> <span class=p>{};</span>
+</span></span><span class=line><span class=cl><span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Writer</span> <span class=o>:</span> <span class=k>public</span> <span class=n>ByteStream</span> <span class=p>{</span> <span class=p>...</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Reader</span> <span class=o>:</span> <span class=k>public</span> <span class=n>ByteStream</span> <span class=p>{</span> <span class=p>...</span> <span class=p>};</span>
+</span></span></code></pre></div><p>从继承关系看，<code>Writer</code> 和 <code>Reader</code> 是 <code>ByteStream</code> 的子类，那为什么 <code>ByteStream</code> 还需要有获取 <code>Writer</code> 和 <code>Reader</code> 的方法呢？</p><p>这就引出了接口隔离原则。</p><h1 id=接口隔离>接口隔离</h1><p><code>Writer</code> 和 <code>Reader</code> 并非独立存在的类，而是 <code>ByteStream</code> 的"视图" (View)。</p><p>先看一下 <code>reader()</code> 的实现：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=n>Reader</span><span class=o>&amp;</span> <span class=n>ByteStream</span><span class=o>::</span><span class=n>reader</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>static_assert</span><span class=p>(</span> <span class=k>sizeof</span><span class=p>(</span> <span class=n>Reader</span> <span class=p>)</span> <span class=o>==</span> <span class=k>sizeof</span><span class=p>(</span> <span class=n>ByteStream</span> <span class=p>),</span>
+</span></span><span class=line><span class=cl>                 <span class=s>&#34;Please add member variables to the ByteStream base, not the ByteStream Reader.&#34;</span> <span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=k>static_cast</span><span class=o>&lt;</span><span class=n>Reader</span><span class=o>&amp;&gt;</span><span class=p>(</span> <span class=o>*</span><span class=k>this</span> <span class=p>);</span> <span class=c1>// NOLINT(*-downcast)
+</span></span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>返回的 <code>Reader</code> 对象内部实际引用的是同一个 <code>ByteStream</code>。也就是说，<code>Writer</code> 和 <code>Reader</code> 都是 <code>ByteStream</code> 的一部分——两者共享来自父类的函数，同时各自拥有独有的方法。</p><h1 id=设计优势>设计优势</h1><p>这样设计的理由如下：</p><h3 id=1-共享状态>1. 共享状态</h3><p>Reader 和 Writer 操作的是同一个缓冲区，只是提供不同的访问接口。</p><h3 id=2-接口隔离>2. 接口隔离</h3><p>每个接口只暴露相关的方法，保证了职责单一。</p><h3 id=3-避免菱形继承>3. 避免菱形继承</h3><p>如果使用继承来实现类似功能，会形成菱形继承结构：</p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>graph TD
+    A[ByteStream] --&gt; B[Writer]
+    A --&gt; C[Reader]
+    B --&gt; D[MyStream]
+    C --&gt; D
+</code></pre><p>这会导致问题：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl>  <span class=k>class</span> <span class=nc>ByteStream</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>public</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>      <span class=kt>uint64_t</span> <span class=n>capacity_</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=kt>bool</span> <span class=n>error_</span> <span class=o>=</span> <span class=nb>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>class</span> <span class=nc>Writer</span> <span class=o>:</span> <span class=k>public</span> <span class=n>ByteStream</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 继承 ByteStream，拥有自己的一份 capacity_ 和 error_
+</span></span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>class</span> <span class=nc>Reader</span> <span class=o>:</span> <span class=k>public</span> <span class=n>ByteStream</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 继承 ByteStream，拥有自己的一份 capacity_ 和 error_
+</span></span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// 危险！如果同时继承两者
+</span></span></span><span class=line><span class=cl>  <span class=k>class</span> <span class=nc>MyStream</span> <span class=o>:</span> <span class=k>public</span> <span class=n>Writer</span><span class=p>,</span> <span class=k>public</span> <span class=n>Reader</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// 现在有两份 capacity_ 和 error_！
+</span></span></span><span class=line><span class=cl>  <span class=p>};</span>
+</span></span></code></pre></div><p>菱形继承会导致 <code>MyStream</code> 中存在两份 <code>ByteStream</code> 的成员变量，破坏了状态的唯一性。</p></main><footer><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
