@@ -1,0 +1,72 @@
+/* TOC Sidebar */
+.post-wrapper {
+  position: relative;
+}
+
+.toc-sidebar {
+  position: fixed;
+  left: max(1em, calc((100vw - 800px) / 2 - 250px));
+  top: 6em;
+  width: 220px;
+  max-height: calc(100vh - 8em);
+  overflow-y: auto;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.toc-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #ddd;
+}
+
+.toc-sidebar #TableOfContents ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc-sidebar #TableOfContents ul ul {
+  padding-left: 1.2em;
+}
+
+.toc-sidebar #TableOfContents li {
+  margin: 0.2em 0;
+}
+
+.toc-sidebar #TableOfContents a {
+  text-decoration: none;
+  color: #555;
+  display: block;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.toc-sidebar #TableOfContents a:hover {
+  color: #333;
+  background: #f0f0f0;
+}
+
+.toc-sidebar #TableOfContents a.active {
+  color: #0070f3;
+  background: #eef6ff;
+  font-weight: 600;
+}
+
+/* Scrollbar for TOC */
+.toc-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.toc-sidebar::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+/* Hide when not enough space */
+@media (max-width: 1200px) {
+  .toc-sidebar {
+    display: none;
+  }
+}

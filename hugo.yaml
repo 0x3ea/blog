@@ -37,6 +37,9 @@ markup:
     codeFences: true
     style: github
     noClasses: false
+  tableOfContents:
+    startLevel: 1
+    endLevel: 4
   goldmark:
     renderer:
       unsafe: true
