@@ -1,27 +1,65 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Git | A minimal Hugo website</title><link rel=stylesheet href=/blog/css/style.css><link rel=stylesheet href=/blog/css/fonts.css><link rel=stylesheet href=/blog/css/syntax.css><link rel=stylesheet href=/blog/css/toc.css></head><body><nav><ul class=menu><li><a href=/blog/>Home</a></li><li><a href=/blog/about/>About</a></li><li><a href=/blog/categories/>Categories</a></li><li><a href=/blog/tags/>Tags</a></li><li><a href=/blog/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>Git</span></h1><h2 class=date>2026/04/05</h2></div><aside class=toc-sidebar><div class=toc-title>目录</div><nav id=TableOfContents><ul><li><a href=#worktree>worktree</a></li><li><a href=#同步>同步</a></li><li><a href=#stash>stash</a></li><li><a href=#工作区暂存区本地仓库>工作区,暂存区,本地仓库</a></li><li><a href=#git回退>git回退</a><ul><li><a href=#修改未提交>修改+未提交</a></li><li><a href=#新建未提交>新建+未提交</a></li><li><a href=#已提交>已提交</a></li></ul></li></ul></nav></aside><main><h1 id=worktree>worktree</h1><p>从同一仓库同时检出多个分支到不同的目录</p><p>假如你需要一边在 <code>main</code> 上修 <code>bug</code>,一边在 <code>feature</code> 上开发,如果没有 <code>worktree</code> 就需要来回切换分支，如果忘了提交</p><pre tabindex=0><code># 创建一个 worktree，基于 main 分支，放到 ../hotfix 目录
-git worktree add ../hotfix main
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Git | A minimal Hugo website</title><link rel=stylesheet href=/blog/css/style.css><link rel=stylesheet href=/blog/css/fonts.css><link rel=stylesheet href=/blog/css/syntax.css><link rel=stylesheet href=/blog/css/toc.css></head><body><nav><ul class=menu><li><a href=/blog/>Home</a></li><li><a href=/blog/about/>About</a></li><li><a href=/blog/categories/>Categories</a></li><li><a href=/blog/tags/>Tags</a></li><li><a href=/blog/index.xml>Subscribe</a></li></ul><hr></nav><div class=article-meta><h1><span class=title>Git</span></h1><h2 class=date>2026/04/05</h2></div><aside class=toc-sidebar><div class=toc-title>目录</div><nav id=TableOfContents><ul><li><a href=#基础概念>基础概念</a><ul><li><a href=#工作区暂存区本地仓库>工作区、暂存区、本地仓库</a></li></ul></li><li><a href=#基础配置>基础配置</a></li><li><a href=#分支操作>分支操作</a><ul><li><a href=#branch>branch</a></li><li><a href=#worktree>worktree</a></li></ul></li><li><a href=#远程协作>远程协作</a><ul><li><a href=#关联远程仓库>关联远程仓库</a></li><li><a href=#同步>同步</a></li><li><a href=#stash>stash</a></li><li><a href=#blame>blame</a></li></ul></li><li><a href=#回退操作>回退操作</a><ul><li><a href=#修改--未提交>修改 + 未提交</a></li><li><a href=#新建--未提交>新建 + 未提交</a></li><li><a href=#已提交>已提交</a><ul><li><a href=#reset>reset</a></li><li><a href=#revert>revert</a></li></ul></li></ul></li><li><a href=#修改历史>修改历史</a></li><li><a href=#发布管理>发布管理</a><ul><li><a href=#release>release</a><ul><li><a href=#查看现有-release-和-tag>查看现有 release 和 tag</a></li><li><a href=#删除旧-release-和-tag>删除旧 release 和 tag</a></li><li><a href=#添加-release-和-tag>添加 release 和 tag</a></li></ul></li><li><a href=#语义化版本>语义化版本</a></li></ul></li></ul></nav></aside><main><p>本文记录 Git 常用操作，按学习路径组织：基础概念 → 基础配置 → 分支操作 → 远程协作 → 高级操作。</p><h1 id=基础概念>基础概念</h1><h2 id=工作区暂存区本地仓库>工作区、暂存区、本地仓库</h2><pre tabindex=0><code>编辑文件（工作区） ──→ git add ──→ 暂存区 ──→ git commit ──→ 本地仓库
+   ↑                                               |
+   └──────────── git checkout/restore ─────────────┘
+</code></pre><h1 id=基础配置>基础配置</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 用户信息</span>
+</span></span><span class=line><span class=cl>git config --global user.email <span class=s2>&#34;you@example.com&#34;</span>
+</span></span><span class=line><span class=cl>git config --global user.name <span class=s2>&#34;Your Name&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 编辑器设置</span>
+</span></span><span class=line><span class=cl>git config --global core.editor vim           <span class=c1># vim</span>
+</span></span><span class=line><span class=cl>git config --global core.editor nano          <span class=c1># nano（更简单）</span>
+</span></span><span class=line><span class=cl>git config --global core.editor <span class=s2>&#34;code --wait&#34;</span> <span class=c1># VSCode</span>
+</span></span></code></pre></div><h1 id=分支操作>分支操作</h1><h2 id=branch>branch</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 当前分支重命名为 main</span>
+</span></span><span class=line><span class=cl>git branch -M main
+</span></span></code></pre></div><h2 id=worktree>worktree</h2><p>从同一仓库同时检出多个分支到不同目录。</p><p>假如你需要一边在 <code>main</code> 上修 <code>bug</code>，一边在 <code>feature</code> 上开发，如果没有 <code>worktree</code> 就需要来回切换分支。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建一个 worktree，基于 main 分支，放到 ../hotfix 目录</span>
+</span></span><span class=line><span class=cl>git worktree add ../hotfix main
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建一个 worktree 并新建分支</span>
+</span></span><span class=line><span class=cl>git worktree add -b feature-x ../feature-x main
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 列出所有 worktree</span>
+</span></span><span class=line><span class=cl>git worktree list
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 用完后删除</span>
+</span></span><span class=line><span class=cl>git worktree remove ../hotfix
+</span></span></code></pre></div><p>与 <code>git clone</code> 相比：使用同一个仓库，分支/提交互通，磁盘占用相对较小（共享对象）</p><p>与 <code>git switch</code> 相比：<code>git switch</code> 切换分支时工作区会被完全替换，如果有未提交的改动可能丢失或冲突</p><h1 id=远程协作>远程协作</h1><h2 id=关联远程仓库>关联远程仓库</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git remote add origin https://github.com/0x3ea/xxx.git
+</span></span></code></pre></div><h2 id=同步>同步</h2><p>本地一个目录下只能有一个仓库（.git）。<strong>一个本地仓库</strong> 可以绑定 <strong>多个远程地址</strong>。</p><p>比如你 fork 了一个项目（origin），开发了自己版本，上传到 GitHub。当上游仓库（upstream）有更新时，你需要同步到本地。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git fetch              <span class=c1># fetch 所有远程</span>
+</span></span><span class=line><span class=cl>git fetch origin       <span class=c1># 只 fetch origin</span>
+</span></span><span class=line><span class=cl>git log                <span class=c1># 查看当前分支的所有历史</span>
+</span></span><span class=line><span class=cl>git log origin/main    <span class=c1># 查看远程 main 分支的所有历史</span>
+</span></span><span class=line><span class=cl>git log --oneline      <span class=c1># 当前分支所有历史（一行一条）</span>
+</span></span><span class=line><span class=cl>git log --all          <span class=c1># 所有分支的历史</span>
+</span></span><span class=line><span class=cl>git log --decorate     <span class=c1># 显示分支名、标签名等引用信息</span>
+</span></span><span class=line><span class=cl>git log --graph        <span class=c1># 用 ASCII 字符画出分支合并图</span>
+</span></span><span class=line><span class=cl>git pull origin/main   <span class=c1># git fetch origin/main + git merge origin/main</span>
+</span></span><span class=line><span class=cl><span class=c1># 注意 merge 的时候要让本地和远程分支对应</span>
+</span></span></code></pre></div><h2 id=stash>stash</h2><p>git stash 把你当前未提交的更改（工作区和暂存区）临时藏起来，让工作区恢复到干净状态。这样你就可以安全地 git pull 拉取远程更新。git stash pop 再把之前藏起来的更改恢复回来。</p><p>简单说就是：临时保存你的改动，腾出空间来拉代码</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git stash list    <span class=c1># 查看 stash</span>
+</span></span><span class=line><span class=cl>git stash drop    <span class=c1># 丢弃最顶部的一条</span>
+</span></span><span class=line><span class=cl>git stash clear   <span class=c1># 清空所有 stash</span>
+</span></span></code></pre></div><h2 id=blame>blame</h2><p>追溯指定文件每行代码的修改记录</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git blame filename             <span class=c1># 查看文件每行的最后一次修改是在哪次提交</span>
+</span></span><span class=line><span class=cl>git blame -L n1,n2 filename    <span class=c1># 文件在 n1,n2 行内的最后一次修改</span>
+</span></span><span class=line><span class=cl>git blame -L 10,20 filename    <span class=c1># 查看第 10 到 20 行</span>
+</span></span><span class=line><span class=cl>git blame -C filename          <span class=c1># 检测代码移动/复制</span>
+</span></span><span class=line><span class=cl>git blame -M filename          <span class=c1># 检测行内移动</span>
+</span></span></code></pre></div><p>git blame 的显示格式为</p><pre tabindex=0><code>commit ID  (代码提交作者  提交时间  代码位于文件中的行数)  实际代码
+1a2b3c4d (张三 2024-01-15 10:30:25 1) func main() {
+5e6f7g8h (李四 2024-01-16 14:20:10 2)     println(&#34;hello&#34;)
+</code></pre><h1 id=回退操作>回退操作</h1><h2 id=修改--未提交>修改 + 未提交</h2><p><code>git checkout -- .</code> 或 <code>git restore .</code></p><h2 id=新建--未提交>新建 + 未提交</h2><p><code>git checkout -- .</code> 或 <code>git clean -fd</code></p><p><code>-f</code> = force（强制），<code>-d</code> = 包含目录</p><p>最好先通过 <code>git clean -dn</code> 或 <code>git clean --dry-run</code> 来查看会删除哪些</p><h2 id=已提交>已提交</h2><h3 id=reset>reset</h3><pre tabindex=0><code>原始历史:  A --- B --- C --- D (HEAD)
+           ↑
+         回到这里
 
-# 创建一个 worktree 并新建分支
-git worktree add -b feature-x ../feature-x main
-
-# 列出所有worktree
-git worktree list
-
-# 用完后删除
-git worktree remove ../hotfix
-</code></pre><p>与 <code>git clone</code> 相比：</p><p>使用同一个仓库,分支/提交互通，磁盘占用相对较小（共享对象）</p><p>与 <code>git switch</code> 相比：</p><p><code>git switch</code>切换分支时工作区会被完全替换，如果有未提交的改动可能丢失或冲突</p><h1 id=同步>同步</h1><p>本地一个目录下只能有一个仓库(.git)</p><p><strong>一个本地仓库</strong> 可以绑定 <strong>多个远程地址</strong></p><p>比如你fork了一个项目(origin),开发了自己版本,上传了自己的版本到github(upstream),别人修改了你的版本,这时你的本地仓库就绑定了多个远程</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>git fetch <span class=c1>#fetch 所有远程</span>
-</span></span><span class=line><span class=cl>git fetch origin <span class=c1>#只 fetch origin</span>
-</span></span><span class=line><span class=cl>git log <span class=c1>#查看当前分支的所有历史</span>
-</span></span><span class=line><span class=cl>git log origin/main <span class=c1>#查看远程main分支的所有历史</span>
-</span></span><span class=line><span class=cl>git log --oneline <span class=c1># 当前分支所有历史（一行一条）</span>
-</span></span><span class=line><span class=cl>git log --all <span class=c1># 所有分支的历史</span>
-</span></span><span class=line><span class=cl>git log --decorate <span class=c1>#显示分支名、标签名等引用信息</span>
-</span></span><span class=line><span class=cl>git log --graph <span class=c1># 用 ASCII 字符画出分支合并图</span>
-</span></span><span class=line><span class=cl>git pull orgin/main <span class=c1># git fetch orgin/main + git merge orgin/main</span>
-</span></span><span class=line><span class=cl><span class=c1># 注意merge的时候要让本地和远程分支对应</span>
-</span></span></code></pre></div><h1 id=stash>stash</h1><p>git stash 把你当前未提交的更改（工作区和暂存区）临时藏起来，让工作区恢复到干净状态。这样你就可以安全地 git pull 拉取远程更新。git stash pop 再把之前藏起来的更改恢复回来。</p><p>简单说就是：临时保存你的改动，腾出空间来拉代码</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>git stash list <span class=c1># 查看stash</span>
-</span></span><span class=line><span class=cl>git stash drop <span class=c1># 丢弃最顶部的一条</span>
-</span></span><span class=line><span class=cl>git stash clear <span class=c1># 清空所有stash</span>
-</span></span></code></pre></div><h1 id=工作区暂存区本地仓库>工作区,暂存区,本地仓库</h1><p>编辑文件(工作区) ──→ git add ──→ 暂存区 ──→ git commit ──→ 本地仓库
-↑ │
-└──────────── git checkout/restore ─────────────┘</p><h1 id=git回退>git回退</h1><h2 id=修改未提交>修改+未提交</h2><p><code>git checkout --.</code> 或<code>git restore .</code></p><h2 id=新建未提交>新建+未提交</h2><p><code>git checkout --.</code> 或<code>git clean -fd</code></p><p><code>-f</code> = force（强制），<code>-d</code> = 包含目录</p><p>最好先通过<code>git clean -n</code>或<code>git clean --dry-run</code>来查看会删除哪些</p><h2 id=已提交>已提交</h2><p><code>git reset</code></p><p><code>--soft</code>（保留修改到暂存区）、<code>--mixed</code>（保留到工作区）、<code>--hard</code>（完全丢弃）</p></main><footer><script src=/blog/js/toc.js></script><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>
+--soft:   B/C/D 的改动 → 暂存区（git commit 可重新提交）
+--mixed:  B/C/D 的改动 → 工作区（需 git add 再提交）
+--hard:   B/C/D 完全消失，工作区也回到 A 状态
+</code></pre><table><thead><tr><th>模式</th><th>A 之后的 commit</th><th>工作区/暂存区变化</th></tr></thead><tbody><tr><td><code>--soft</code></td><td><strong>保留在暂存区</strong></td><td>工作区不变，改动全进暂存区</td></tr><tr><td><code>--mixed</code>（默认）</td><td><strong>保留在工作区</strong></td><td>工作区不变，改动不暂存</td></tr><tr><td><code>--hard</code></td><td><strong>彻底丢弃</strong>（有风险）</td><td>工作区强制回退到 A 状态</td></tr></tbody></table><h3 id=revert>revert</h3><p>用一次新的提交来撤销某次（或某几次）旧提交的改动</p><h1 id=修改历史>修改历史</h1><p><code>filter-branch</code> 会遍历所有 <code>commit</code>，对每一个 <code>commit</code> 用提供的命令重新构建 index，然后生成一个新的 <code>commit</code> 对象。</p><p>所有涉及 <code>TODO.md</code> 的 <code>commit</code> 都被重写为不包含此文件的新 <code>commit</code>，旧的 <code>commit</code> 对象仍然存在于本地（在 refs/original/ 下），但不再被任何分支引用</p><p>注意：所有 <code>commit hash</code> 都变了</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git filter-branch --force <span class=se>\
+</span></span></span><span class=line><span class=cl>  --index-filter <span class=s1>&#39;git rm --cached --ignore-unmatch TODO.md&#39;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>  --prune-empty -- --all
+</span></span></code></pre></div><blockquote><p><strong>注意</strong>：<code>filter-branch</code> 已被 Git 官方废弃，推荐使用 <a href=https://github.com/newren/git-filter-repo>git-filter-repo</a>。</p></blockquote><h1 id=发布管理>发布管理</h1><h2 id=release>release</h2><p>Git tag + 元数据（描述、二进制附件）</p><ul><li>Tag：指向某个具体的 commit，不可变</li><li>Release：tag 上的一层包装，包含标题、描述、附件</li><li>二进制附件：Release 独有，不属于 Git</li></ul><h3 id=查看现有-release-和-tag>查看现有 release 和 tag</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>gh release list          <span class=c1># 列出所有 release</span>
+</span></span><span class=line><span class=cl>git tag -l               <span class=c1># 列出所有 tag</span>
+</span></span></code></pre></div><h3 id=删除旧-release-和-tag>删除旧 release 和 tag</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>gh release delete v0.1.0 --yes          <span class=c1># 删除 GitHub 上的 release</span>
+</span></span><span class=line><span class=cl>git push origin --delete v0.1.0         <span class=c1># 删除远程 tag</span>
+</span></span><span class=line><span class=cl>git tag -d v0.1.0                       <span class=c1># 删除本地 tag（如果有）</span>
+</span></span></code></pre></div><h3 id=添加-release-和-tag>添加 release 和 tag</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git tag v0.2.0     <span class=c1># 给当前 HEAD（最新 commit）打上 v0.2.0 标签</span>
+</span></span><span class=line><span class=cl>git push origin v0.2.0
+</span></span><span class=line><span class=cl>gh release create v0.2.0 --title <span class=s2>&#34;v0.2.0&#34;</span> --notes <span class=s2>&#34;配置路径改用系统标准目录&#34;</span> ./build/*
+</span></span></code></pre></div><h2 id=语义化版本>语义化版本</h2><p>版本号格式是 <code>vMAJOR.MINOR.PATCH</code>，遵循<a href=https://semver.org/>语义化版本</a></p><ul><li><code>MAJOR</code>（主版本号） — 不兼容的 API 变更</li><li><code>MINOR</code>（次版本号）— 向后兼容的新功能</li><li><code>PATCH</code>（修订号） — 向后兼容的 bug 修复</li></ul></main><footer><script src=/blog/js/toc.js></script><hr>© <a href=https://0x3ea.cn>0x3ea</a> 2026 &ndash; 2026 | <a href=https://github.com/0x3ea>Github</a></footer></body></html>

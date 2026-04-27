@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on A minimal Hugo website</title><link>https://0x3ea.github.io/blog/tags/go/</link><description>Recent content in Go on A minimal Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 30 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://0x3ea.github.io/blog/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go-基本语法</title><link>https://0x3ea.github.io/blog/posts/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on A minimal Hugo website</title><link>https://0x3ea.github.io/blog/tags/go/</link><description>Recent content in Go on A minimal Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2026 14:35:33 +0800</lastBuildDate><atom:link href="https://0x3ea.github.io/blog/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go-项目规范</title><link>https://0x3ea.github.io/blog/posts/go/go2/</link><pubDate>Wed, 15 Apr 2026 14:35:33 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/go/go2/</guid><description>&lt;h1 id="初始化项目"&gt;初始化项目&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;go mod init github.com/0x3ea/KeyForge&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;带上前缀的作用:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;模块唯一标识&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;防止命名冲突&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;自动下载依赖&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Go 会从 github.com 自动拉取代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get github.com/0x3ea/KeyForge
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;版本管理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;import &lt;span class="s2"&gt;&amp;#34;github.com/gin-gonic/gin/v2&amp;#34;&lt;/span&gt; // 带版本号
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="引用函数"&gt;引用函数&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;&amp;#34;github.com/0x3ea/KeyForge/internal/crypto&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;crypto&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;GenerateKey&lt;/span&gt;&lt;span class="p"&gt;([]&lt;/span&gt;&lt;span class="nb"&gt;byte&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;123456&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="构建项目"&gt;构建项目&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go build -o Keyforge
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="工具"&gt;工具&lt;/h1&gt;
+&lt;p&gt;gofmt&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 显示当前文件与格式化后版本的差异对比（diff），但不修改原文件。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;gofmt -d 文件名.go
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;命令&lt;/th&gt;
+ &lt;th&gt;行为&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;gofmt -w 文件.go&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;直接覆盖&lt;/strong&gt;写入格式化后的内容&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;gofmt -l 文件.go&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;只&lt;strong&gt;列出&lt;/strong&gt;需要格式化的文件名&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;gofmt -d 文件.go&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;打印 diff&lt;/strong&gt;，不修改文件&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;gofmt 文件.go&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;打印格式化后的完整内容到 stdout&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.github.io/blog/posts/go/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/go/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
 &lt;table&gt;
  &lt;thead&gt;
  &lt;tr&gt;
@@ -59,5 +109,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;q&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="包package"&gt;包(package)&lt;/h1&gt;
-&lt;h1 id="导出规则"&gt;导出规则&lt;/h1&gt;
-&lt;p&gt;Go 中所有标识符（变量、常量、函数、类型、方法）的可见性规则：&lt;/p&gt;</description></item></channel></rss>
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;import &lt;span class="o"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="s2"&gt;&amp;#34;github.com/0x3ea/KeyForge/internal/crypto&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="s2"&gt;&amp;#34;github.com/0x3ea/KeyForge/internal/encode&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;导入包时,实际上导入的是包的物理位置
+调用时,实际上调用的是 .go 文件里的 package 声明&lt;/p&gt;</description></item></channel></rss>

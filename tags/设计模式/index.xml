@@ -25,5 +25,5 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从继承关系看，&lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 是 &lt;code&gt;ByteStream&lt;/code&gt; 的子类，那为什么 &lt;code&gt;ByteStream&lt;/code&gt; 还需要有获取 &lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 的方法呢？&lt;/p&gt;
 &lt;p&gt;这就引出了接口隔离原则。&lt;/p&gt;
 &lt;h1 id="接口隔离"&gt;接口隔离&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 并非独立存在的类，而是 &lt;code&gt;ByteStream&lt;/code&gt; 的&amp;quot;视图&amp;quot; (View)。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 并非独立存在的类，而是 &lt;code&gt;ByteStream&lt;/code&gt; 的&amp;quot;视图&amp;quot; (&lt;code&gt;View&lt;/code&gt;)。&lt;/p&gt;
 &lt;p&gt;先看一下 &lt;code&gt;reader()&lt;/code&gt; 的实现：&lt;/p&gt;</description></item></channel></rss>

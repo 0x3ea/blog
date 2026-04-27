@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A minimal Hugo website</title><link>https://0x3ea.github.io/blog/</link><description>Recent content on A minimal Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 10 Apr 2026 10:05:54 +0800</lastBuildDate><atom:link href="https://0x3ea.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>接口隔离</title><link>https://0x3ea.github.io/blog/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</link><pubDate>Fri, 10 Apr 2026 10:05:54 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</guid><description>&lt;h1 id="背景"&gt;背景&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>A minimal Hugo website</title><link>https://0x3ea.github.io/blog/</link><description>Recent content on A minimal Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 27 Apr 2026 13:42:06 +0800</lastBuildDate><atom:link href="https://0x3ea.github.io/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Vim</title><link>https://0x3ea.github.io/blog/posts/vim/</link><pubDate>Mon, 27 Apr 2026 13:42:06 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/vim/</guid><description>&lt;p&gt;&lt;code&gt;G&lt;/code&gt; 跳到最底端&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gg&lt;/code&gt; 跳到最顶端&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;j&lt;/code&gt; 下一行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;k&lt;/code&gt; 上一行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;?&lt;/code&gt; 关键字: 按关键字筛选&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;n&lt;/code&gt; 查找下一个&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;shift + n&lt;/code&gt; 查找上一个&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;:set nu&lt;/code&gt; 显示行号&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;:100&lt;/code&gt; 跳转到第100行&lt;/p&gt;</description></item><item><title>Go-项目规范</title><link>https://0x3ea.github.io/blog/posts/go/go2/</link><pubDate>Wed, 15 Apr 2026 14:35:33 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/go/go2/</guid><description>&lt;h1 id="初始化项目"&gt;初始化项目&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;go mod init github.com/0x3ea/KeyForge&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;带上前缀的作用:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;模块唯一标识&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;防止命名冲突&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;自动下载依赖&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Go 会从 github.com 自动拉取代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get github.com/0x3ea/KeyForge
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;版本管理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;import &lt;span class="s2"&gt;&amp;#34;github.com/gin-gonic/gin/v2&amp;#34;&lt;/span&gt; // 带版本号
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="引用函数"&gt;引用函数&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="s"&gt;&amp;#34;github.com/0x3ea/KeyForge/internal/crypto&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;crypto&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;GenerateKey&lt;/span&gt;&lt;span class="p"&gt;([]&lt;/span&gt;&lt;span class="nb"&gt;byte&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;123456&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="构建项目"&gt;构建项目&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go build -o Keyforge
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="工具"&gt;工具&lt;/h1&gt;
+&lt;p&gt;gofmt&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 显示当前文件与格式化后版本的差异对比（diff），但不修改原文件。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;gofmt -d 文件名.go
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;命令&lt;/th&gt;
+ &lt;th&gt;行为&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;gofmt -w 文件.go&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;直接覆盖&lt;/strong&gt;写入格式化后的内容&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;gofmt -l 文件.go&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;只&lt;strong&gt;列出&lt;/strong&gt;需要格式化的文件名&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;gofmt -d 文件.go&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;&lt;strong&gt;打印 diff&lt;/strong&gt;，不修改文件&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;code&gt;gofmt 文件.go&lt;/code&gt;&lt;/td&gt;
+ &lt;td&gt;打印格式化后的完整内容到 stdout&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title>接口隔离</title><link>https://0x3ea.github.io/blog/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</link><pubDate>Fri, 10 Apr 2026 10:05:54 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</guid><description>&lt;h1 id="背景"&gt;背景&lt;/h1&gt;
 &lt;p&gt;起因是在写 CS144 的 lab0 时，看了一下 &lt;code&gt;ByteStream&lt;/code&gt; 的声明（删去了一些无关的函数）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Reader&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Writer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -25,7 +83,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;从继承关系看，&lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 是 &lt;code&gt;ByteStream&lt;/code&gt; 的子类，那为什么 &lt;code&gt;ByteStream&lt;/code&gt; 还需要有获取 &lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 的方法呢？&lt;/p&gt;
 &lt;p&gt;这就引出了接口隔离原则。&lt;/p&gt;
 &lt;h1 id="接口隔离"&gt;接口隔离&lt;/h1&gt;
-&lt;p&gt;&lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 并非独立存在的类，而是 &lt;code&gt;ByteStream&lt;/code&gt; 的&amp;quot;视图&amp;quot; (View)。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 并非独立存在的类，而是 &lt;code&gt;ByteStream&lt;/code&gt; 的&amp;quot;视图&amp;quot; (&lt;code&gt;View&lt;/code&gt;)。&lt;/p&gt;
 &lt;p&gt;先看一下 &lt;code&gt;reader()&lt;/code&gt; 的实现：&lt;/p&gt;</description></item><item><title>CS144-Lab0</title><link>https://0x3ea.github.io/blog/posts/cs144-lab0/</link><pubDate>Tue, 07 Apr 2026 23:24:18 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/cs144-lab0/</guid><description>&lt;h1 id="31-fetch-a-web-page"&gt;3.1 Fetch a Web page&lt;/h1&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 通过 DNS 解析拿到 IP → 建立 TCP 连接&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;telnet cs144.keithw.org http
@@ -151,46 +209,40 @@
 &lt;li&gt;&lt;strong&gt;Lab 6&lt;/strong&gt;: IP forwarding router - IP转发路由器&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Lab 7&lt;/strong&gt;: NAT-based web proxy - NAT网络代理&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;学习资源：&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Git</title><link>https://0x3ea.github.io/blog/posts/git/</link><pubDate>Sun, 05 Apr 2026 00:04:24 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/git/</guid><description>&lt;h1 id="worktree"&gt;worktree&lt;/h1&gt;
-&lt;p&gt;从同一仓库同时检出多个分支到不同的目录&lt;/p&gt;
-&lt;p&gt;假如你需要一边在 &lt;code&gt;main&lt;/code&gt; 上修 &lt;code&gt;bug&lt;/code&gt;,一边在 &lt;code&gt;feature&lt;/code&gt; 上开发,如果没有 &lt;code&gt;worktree&lt;/code&gt; 就需要来回切换分支，如果忘了提交&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;# 创建一个 worktree，基于 main 分支，放到 ../hotfix 目录
-git worktree add ../hotfix main
-
-# 创建一个 worktree 并新建分支
-git worktree add -b feature-x ../feature-x main
-
-# 列出所有worktree
-git worktree list
-
-# 用完后删除
-git worktree remove ../hotfix
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;与 &lt;code&gt;git clone&lt;/code&gt; 相比：&lt;/p&gt;
-&lt;p&gt;使用同一个仓库,分支/提交互通，磁盘占用相对较小（共享对象）&lt;/p&gt;
-&lt;p&gt;与 &lt;code&gt;git switch&lt;/code&gt; 相比：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git switch&lt;/code&gt;切换分支时工作区会被完全替换，如果有未提交的改动可能丢失或冲突&lt;/p&gt;
-&lt;h1 id="同步"&gt;同步&lt;/h1&gt;
-&lt;p&gt;本地一个目录下只能有一个仓库(.git)&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;一个本地仓库&lt;/strong&gt; 可以绑定 &lt;strong&gt;多个远程地址&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;比如你fork了一个项目(origin),开发了自己版本,上传了自己的版本到github(upstream),别人修改了你的版本,这时你的本地仓库就绑定了多个远程&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git fetch &lt;span class="c1"&gt;#fetch 所有远程&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git fetch origin &lt;span class="c1"&gt;#只 fetch origin&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git log &lt;span class="c1"&gt;#查看当前分支的所有历史&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git log origin/main &lt;span class="c1"&gt;#查看远程main分支的所有历史&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git log --oneline &lt;span class="c1"&gt;# 当前分支所有历史（一行一条）&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git log --all &lt;span class="c1"&gt;# 所有分支的历史&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git log --decorate &lt;span class="c1"&gt;#显示分支名、标签名等引用信息&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git log --graph &lt;span class="c1"&gt;# 用 ASCII 字符画出分支合并图&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git pull orgin/main &lt;span class="c1"&gt;# git fetch orgin/main + git merge orgin/main&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 注意merge的时候要让本地和远程分支对应&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="stash"&gt;stash&lt;/h1&gt;
-&lt;p&gt;git stash 把你当前未提交的更改（工作区和暂存区）临时藏起来，让工作区恢复到干净状态。这样你就可以安全地 git pull 拉取远程更新。git stash pop 再把之前藏起来的更改恢复回来。&lt;/p&gt;</description></item><item><title>Vim常用命令</title><link>https://0x3ea.github.io/blog/posts/vim/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/vim/</guid><description>&lt;p&gt;G: 跳到最底端&lt;/p&gt;
-&lt;p&gt;gg: 跳到最顶端&lt;/p&gt;
-&lt;p&gt;?关键字: 按关键字筛选&lt;/p&gt;
-&lt;p&gt;n: 查找下一个&lt;/p&gt;
-&lt;p&gt;shift+n: 查找上一个&lt;/p&gt;
-&lt;p&gt;:set nu 显示行号&lt;/p&gt;
-&lt;p&gt;:100 跳转到第100行&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.github.io/blog/posts/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;学习资源：&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Git</title><link>https://0x3ea.github.io/blog/posts/git/</link><pubDate>Sun, 05 Apr 2026 00:04:24 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/git/</guid><description>&lt;p&gt;本文记录 Git 常用操作，按学习路径组织：基础概念 → 基础配置 → 分支操作 → 远程协作 → 高级操作。&lt;/p&gt;
+&lt;h1 id="基础概念"&gt;基础概念&lt;/h1&gt;
+&lt;h2 id="工作区暂存区本地仓库"&gt;工作区、暂存区、本地仓库&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;编辑文件（工作区） ──→ git add ──→ 暂存区 ──→ git commit ──→ 本地仓库
+ ↑ |
+ └──────────── git checkout/restore ─────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id="基础配置"&gt;基础配置&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 用户信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git config --global user.email &lt;span class="s2"&gt;&amp;#34;you@example.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git config --global user.name &lt;span class="s2"&gt;&amp;#34;Your Name&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 编辑器设置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git config --global core.editor vim &lt;span class="c1"&gt;# vim&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git config --global core.editor nano &lt;span class="c1"&gt;# nano（更简单）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git config --global core.editor &lt;span class="s2"&gt;&amp;#34;code --wait&amp;#34;&lt;/span&gt; &lt;span class="c1"&gt;# VSCode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="分支操作"&gt;分支操作&lt;/h1&gt;
+&lt;h2 id="branch"&gt;branch&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 当前分支重命名为 main&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -M main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="worktree"&gt;worktree&lt;/h2&gt;
+&lt;p&gt;从同一仓库同时检出多个分支到不同目录。&lt;/p&gt;</description></item><item><title>Linux 常用命令</title><link>https://0x3ea.github.io/blog/posts/linux/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/linux/</guid><description>&lt;h2 id="日志查看"&gt;日志查看&lt;/h2&gt;
+&lt;p&gt;假如日志是这样的：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;2026-04-14 19:36:47 | INFO | pool-2-COKRequestHandler-thread-26 | c.e.cok.joymeng.KSTask.KSTaskService-10 | KSTaskService | grantTaskReward success | 10223885000010 | taskId: 80000004 | originStatus: 2 | receiveWay: email&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;以下示例中的关键字请替换为自己日志中的实际内容。&lt;/p&gt;
+&lt;p&gt;多关键字筛选：&lt;code&gt;awk '/grantTaskReward success/ &amp;amp;&amp;amp; /10223885000010/ &amp;amp;&amp;amp; /2026-04-15/' smartfox.log.2026-04-*&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;grep -n &amp;quot;grantTaskReward success&amp;quot; smartfox.log.2026-04-14* | grep 10223885000010&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;行太长时，可以只提取部分字段：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;awk -F '|' '/10223885000010/ &amp;amp;&amp;amp; /grantTaskReward success/ {print $6, $7, $8}' smartfox.log.2026-04-14*&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;查看最近 100 条命令：&lt;code&gt;history 100&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;获取文件的绝对路径：&lt;code&gt;realpath filename&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="文件权限"&gt;文件权限&lt;/h2&gt;
+&lt;p&gt;查看文件权限：&lt;code&gt;ls -l filename&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Linux 的文件权限分为读、写、执行，分别对应 r、w、x。&lt;/p&gt;
+&lt;p&gt;读、写、执行三种权限各占一个比特位，恰好可以用一个三位的八进制数（0–7）表示一组权限。&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.github.io/blog/posts/go/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/go/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
 &lt;table&gt;
  &lt;thead&gt;
  &lt;tr&gt;
@@ -251,8 +303,12 @@ git worktree remove ../hotfix
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;cap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;q&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id="包package"&gt;包(package)&lt;/h1&gt;
-&lt;h1 id="导出规则"&gt;导出规则&lt;/h1&gt;
-&lt;p&gt;Go 中所有标识符（变量、常量、函数、类型、方法）的可见性规则：&lt;/p&gt;</description></item><item><title>2026牛客寒假算法基础集训营5</title><link>https://0x3ea.github.io/blog/posts/2026%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A55/</link><pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/2026%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A55/</guid><description>&lt;h1 id="b智乃的瓷砖"&gt;B.智乃的瓷砖&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;import &lt;span class="o"&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="s2"&gt;&amp;#34;github.com/0x3ea/KeyForge/internal/crypto&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="s2"&gt;&amp;#34;github.com/0x3ea/KeyForge/internal/encode&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;导入包时,实际上导入的是包的物理位置
+调用时,实际上调用的是 .go 文件里的 package 声明&lt;/p&gt;</description></item><item><title>2026牛客寒假算法基础集训营5</title><link>https://0x3ea.github.io/blog/posts/2026%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A55/</link><pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/2026%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A55/</guid><description>&lt;h1 id="b智乃的瓷砖"&gt;B.智乃的瓷砖&lt;/h1&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;solve&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;cin&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
