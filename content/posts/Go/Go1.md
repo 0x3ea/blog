@@ -40,6 +40,14 @@ func main() {
 
 # 包(package)
 
+```shell
+import (
+	"github.com/0x3ea/KeyForge/internal/crypto"
+	"github.com/0x3ea/KeyForge/internal/encode"
+)
+```
+导入包时,实际上导入的是包的物理位置
+调用时,实际上调用的是 .go 文件里的 package 声明
 
 
 # 导出规则
