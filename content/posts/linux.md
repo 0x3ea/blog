@@ -28,6 +28,14 @@ tags:
 
 获取文件的绝对路径：`realpath filename`
 
+查看grep关键字附近: 
+
+```bash
+grep -C 3 xxx filename # 显示匹配行上下各 3 行
+grep -B 3 xxx filename # 显示匹配行上 3 行
+grep -A 3 xxx filename # 显示匹配行下 3 行
+```
+
 ## 文件权限
 
 查看文件权限：`ls -l filename`

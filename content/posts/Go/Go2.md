@@ -57,3 +57,16 @@ gofmt -d 文件名.go
 | `gofmt 文件.go`    | 打印格式化后的完整内容到 stdout |
 
 
+go test
+
+```
+go test ./...  # 执行当前目录下的所有测试
+```
+
+Go 通过文件名约定来识别测试文件，文件名以_test.go结尾
+
+测试文件里必须包含 import "testing"
+
+测试函数的格式必须为 func TestXxx(t *testing.T)
+
+
