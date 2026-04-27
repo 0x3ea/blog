@@ -56,7 +56,11 @@
  &lt;td&gt;打印格式化后的完整内容到 stdout&lt;/td&gt;
  &lt;/tr&gt;
  &lt;/tbody&gt;
-&lt;/table&gt;</description></item><item><title>接口隔离</title><link>https://0x3ea.github.io/blog/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</link><pubDate>Fri, 10 Apr 2026 10:05:54 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</guid><description>&lt;h1 id="背景"&gt;背景&lt;/h1&gt;
+&lt;/table&gt;
+&lt;p&gt;go test&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;go test ./... # 执行当前目录下的所有测试
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Go 通过文件名约定来识别测试文件，文件名以_test.go结尾&lt;/p&gt;
+&lt;p&gt;测试文件里必须包含 import &amp;ldquo;testing&amp;rdquo;&lt;/p&gt;</description></item><item><title>接口隔离</title><link>https://0x3ea.github.io/blog/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</link><pubDate>Fri, 10 Apr 2026 10:05:54 +0800</pubDate><guid>https://0x3ea.github.io/blog/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</guid><description>&lt;h1 id="背景"&gt;背景&lt;/h1&gt;
 &lt;p&gt;起因是在写 CS144 的 lab0 时，看了一下 &lt;code&gt;ByteStream&lt;/code&gt; 的声明（删去了一些无关的函数）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Reader&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Writer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -239,10 +243,12 @@
 &lt;p&gt;&lt;code&gt;awk -F '|' '/10223885000010/ &amp;amp;&amp;amp; /grantTaskReward success/ {print $6, $7, $8}' smartfox.log.2026-04-14*&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;查看最近 100 条命令：&lt;code&gt;history 100&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;获取文件的绝对路径：&lt;code&gt;realpath filename&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="文件权限"&gt;文件权限&lt;/h2&gt;
-&lt;p&gt;查看文件权限：&lt;code&gt;ls -l filename&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Linux 的文件权限分为读、写、执行，分别对应 r、w、x。&lt;/p&gt;
-&lt;p&gt;读、写、执行三种权限各占一个比特位，恰好可以用一个三位的八进制数（0–7）表示一组权限。&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.github.io/blog/posts/go/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/go/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
+&lt;p&gt;查看grep关键字附近:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep -C &lt;span class="m"&gt;3&lt;/span&gt; xxx filename &lt;span class="c1"&gt;# 显示匹配行上下各 3 行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep -B &lt;span class="m"&gt;3&lt;/span&gt; xxx filename &lt;span class="c1"&gt;# 显示匹配行上 3 行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep -A &lt;span class="m"&gt;3&lt;/span&gt; xxx filename &lt;span class="c1"&gt;# 显示匹配行下 3 行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="文件权限"&gt;文件权限&lt;/h2&gt;
+&lt;p&gt;查看文件权限：&lt;code&gt;ls -l filename&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.github.io/blog/posts/go/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/blog/posts/go/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
 &lt;table&gt;
  &lt;thead&gt;
  &lt;tr&gt;

@@ -8,7 +8,9 @@
 &lt;p&gt;&lt;code&gt;awk -F '|' '/10223885000010/ &amp;amp;&amp;amp; /grantTaskReward success/ {print $6, $7, $8}' smartfox.log.2026-04-14*&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;查看最近 100 条命令：&lt;code&gt;history 100&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;获取文件的绝对路径：&lt;code&gt;realpath filename&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id="文件权限"&gt;文件权限&lt;/h2&gt;
-&lt;p&gt;查看文件权限：&lt;code&gt;ls -l filename&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Linux 的文件权限分为读、写、执行，分别对应 r、w、x。&lt;/p&gt;
-&lt;p&gt;读、写、执行三种权限各占一个比特位，恰好可以用一个三位的八进制数（0–7）表示一组权限。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;查看grep关键字附近:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep -C &lt;span class="m"&gt;3&lt;/span&gt; xxx filename &lt;span class="c1"&gt;# 显示匹配行上下各 3 行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep -B &lt;span class="m"&gt;3&lt;/span&gt; xxx filename &lt;span class="c1"&gt;# 显示匹配行上 3 行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep -A &lt;span class="m"&gt;3&lt;/span&gt; xxx filename &lt;span class="c1"&gt;# 显示匹配行下 3 行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="文件权限"&gt;文件权限&lt;/h2&gt;
+&lt;p&gt;查看文件权限：&lt;code&gt;ls -l filename&lt;/code&gt;&lt;/p&gt;</description></item></channel></rss>
