@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GO on 0x3ea's Hugo website</title><link>https://0x3ea.github.io/tags/go/</link><description>Recent content in GO on 0x3ea's Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2026 14:35:33 +0800</lastBuildDate><atom:link href="https://0x3ea.github.io/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go-项目规范</title><link>https://0x3ea.github.io/posts/go/go2/</link><pubDate>Wed, 15 Apr 2026 14:35:33 +0800</pubDate><guid>https://0x3ea.github.io/posts/go/go2/</guid><description>&lt;h1 id="初始化项目"&gt;初始化项目&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GO on 0x3ea's Hugo website</title><link>https://0x3ea.cn/tags/go/</link><description>Recent content in GO on 0x3ea's Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 15 Apr 2026 14:35:33 +0800</lastBuildDate><atom:link href="https://0x3ea.cn/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go-项目规范</title><link>https://0x3ea.cn/posts/go/go2/</link><pubDate>Wed, 15 Apr 2026 14:35:33 +0800</pubDate><guid>https://0x3ea.cn/posts/go/go2/</guid><description>&lt;h1 id="初始化项目"&gt;初始化项目&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;go mod init github.com/0x3ea/KeyForge&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;带上前缀的作用:&lt;/p&gt;
 &lt;ol&gt;
@@ -52,7 +52,7 @@
 &lt;p&gt;go test&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;go test ./... # 执行当前目录下的所有测试
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Go 通过文件名约定来识别测试文件，文件名以_test.go结尾&lt;/p&gt;
-&lt;p&gt;测试文件里必须包含 import &amp;ldquo;testing&amp;rdquo;&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.github.io/posts/go/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/posts/go/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
+&lt;p&gt;测试文件里必须包含 import &amp;ldquo;testing&amp;rdquo;&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.cn/posts/go/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.cn/posts/go/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
 &lt;table&gt;
  &lt;thead&gt;
  &lt;tr&gt;

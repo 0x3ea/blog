@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 0x3ea's Hugo website</title><link>https://0x3ea.github.io/posts/</link><description>Recent content in Posts on 0x3ea's Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 27 Apr 2026 13:42:06 +0800</lastBuildDate><atom:link href="https://0x3ea.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Vim</title><link>https://0x3ea.github.io/posts/vim/</link><pubDate>Mon, 27 Apr 2026 13:42:06 +0800</pubDate><guid>https://0x3ea.github.io/posts/vim/</guid><description>&lt;p&gt;&lt;code&gt;G&lt;/code&gt; 跳到最底端&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 0x3ea's Hugo website</title><link>https://0x3ea.cn/posts/</link><description>Recent content in Posts on 0x3ea's Hugo website</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 27 Apr 2026 13:42:06 +0800</lastBuildDate><atom:link href="https://0x3ea.cn/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Vim</title><link>https://0x3ea.cn/posts/vim/</link><pubDate>Mon, 27 Apr 2026 13:42:06 +0800</pubDate><guid>https://0x3ea.cn/posts/vim/</guid><description>&lt;p&gt;&lt;code&gt;G&lt;/code&gt; 跳到最底端&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;gg&lt;/code&gt; 跳到最顶端&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;j&lt;/code&gt; 下一行&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;k&lt;/code&gt; 上一行&lt;/p&gt;
@@ -6,7 +6,7 @@
 &lt;p&gt;&lt;code&gt;n&lt;/code&gt; 查找下一个&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;shift + n&lt;/code&gt; 查找上一个&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;:set nu&lt;/code&gt; 显示行号&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;:100&lt;/code&gt; 跳转到第100行&lt;/p&gt;</description></item><item><title>Go-项目规范</title><link>https://0x3ea.github.io/posts/go/go2/</link><pubDate>Wed, 15 Apr 2026 14:35:33 +0800</pubDate><guid>https://0x3ea.github.io/posts/go/go2/</guid><description>&lt;h1 id="初始化项目"&gt;初始化项目&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;:100&lt;/code&gt; 跳转到第100行&lt;/p&gt;</description></item><item><title>Go-项目规范</title><link>https://0x3ea.cn/posts/go/go2/</link><pubDate>Wed, 15 Apr 2026 14:35:33 +0800</pubDate><guid>https://0x3ea.cn/posts/go/go2/</guid><description>&lt;h1 id="初始化项目"&gt;初始化项目&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;go mod init github.com/0x3ea/KeyForge&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;带上前缀的作用:&lt;/p&gt;
 &lt;ol&gt;
@@ -60,7 +60,7 @@
 &lt;p&gt;go test&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;go test ./... # 执行当前目录下的所有测试
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Go 通过文件名约定来识别测试文件，文件名以_test.go结尾&lt;/p&gt;
-&lt;p&gt;测试文件里必须包含 import &amp;ldquo;testing&amp;rdquo;&lt;/p&gt;</description></item><item><title>接口隔离</title><link>https://0x3ea.github.io/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</link><pubDate>Fri, 10 Apr 2026 10:05:54 +0800</pubDate><guid>https://0x3ea.github.io/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</guid><description>&lt;h1 id="背景"&gt;背景&lt;/h1&gt;
+&lt;p&gt;测试文件里必须包含 import &amp;ldquo;testing&amp;rdquo;&lt;/p&gt;</description></item><item><title>接口隔离</title><link>https://0x3ea.cn/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</link><pubDate>Fri, 10 Apr 2026 10:05:54 +0800</pubDate><guid>https://0x3ea.cn/posts/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB/</guid><description>&lt;h1 id="背景"&gt;背景&lt;/h1&gt;
 &lt;p&gt;起因是在写 CS144 的 lab0 时，看了一下 &lt;code&gt;ByteStream&lt;/code&gt; 的声明（删去了一些无关的函数）：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Reader&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Writer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -88,7 +88,7 @@
 &lt;p&gt;这就引出了接口隔离原则。&lt;/p&gt;
 &lt;h1 id="接口隔离"&gt;接口隔离&lt;/h1&gt;
 &lt;p&gt;&lt;code&gt;Writer&lt;/code&gt; 和 &lt;code&gt;Reader&lt;/code&gt; 并非独立存在的类，而是 &lt;code&gt;ByteStream&lt;/code&gt; 的&amp;quot;视图&amp;quot; (&lt;code&gt;View&lt;/code&gt;)。&lt;/p&gt;
-&lt;p&gt;先看一下 &lt;code&gt;reader()&lt;/code&gt; 的实现：&lt;/p&gt;</description></item><item><title>CS144-Lab0</title><link>https://0x3ea.github.io/posts/cs144-lab0/</link><pubDate>Tue, 07 Apr 2026 23:24:18 +0800</pubDate><guid>https://0x3ea.github.io/posts/cs144-lab0/</guid><description>&lt;h1 id="31-fetch-a-web-page"&gt;3.1 Fetch a Web page&lt;/h1&gt;
+&lt;p&gt;先看一下 &lt;code&gt;reader()&lt;/code&gt; 的实现：&lt;/p&gt;</description></item><item><title>CS144-Lab0</title><link>https://0x3ea.cn/posts/cs144-lab0/</link><pubDate>Tue, 07 Apr 2026 23:24:18 +0800</pubDate><guid>https://0x3ea.cn/posts/cs144-lab0/</guid><description>&lt;h1 id="31-fetch-a-web-page"&gt;3.1 Fetch a Web page&lt;/h1&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 通过 DNS 解析拿到 IP → 建立 TCP 连接&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;telnet cs144.keithw.org http
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;GET /lab0/123456 HTTP/1.1
@@ -182,7 +182,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;receive meeage: &amp;#34;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>web</title><link>https://0x3ea.github.io/posts/purrfect-puzzling-nova/</link><pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/posts/purrfect-puzzling-nova/</guid><description>&lt;h1 id="计算机网络系统学习计划实验驱动版"&gt;计算机网络系统学习计划（实验驱动版）&lt;/h1&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>web</title><link>https://0x3ea.cn/posts/purrfect-puzzling-nova/</link><pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.cn/posts/purrfect-puzzling-nova/</guid><description>&lt;h1 id="计算机网络系统学习计划实验驱动版"&gt;计算机网络系统学习计划（实验驱动版）&lt;/h1&gt;
 &lt;h2 id="-context"&gt;📋 Context&lt;/h2&gt;
 &lt;p&gt;针对&lt;strong&gt;有基础学习者&lt;/strong&gt;定制的实验驱动型学习计划，每周5-10小时，以Stanford CS144为核心，通过从零实现TCP/IP协议栈来系统掌握计算机网络知识。&lt;/p&gt;
 &lt;h2 id="-学习目标"&gt;🎯 学习目标&lt;/h2&gt;
@@ -213,7 +213,7 @@
 &lt;li&gt;&lt;strong&gt;Lab 6&lt;/strong&gt;: IP forwarding router - IP转发路由器&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Lab 7&lt;/strong&gt;: NAT-based web proxy - NAT网络代理&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;学习资源：&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Git</title><link>https://0x3ea.github.io/posts/git/</link><pubDate>Sun, 05 Apr 2026 00:04:24 +0800</pubDate><guid>https://0x3ea.github.io/posts/git/</guid><description>&lt;p&gt;本文记录 Git 常用操作，按学习路径组织：基础概念 → 基础配置 → 分支操作 → 远程协作 → 高级操作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;学习资源：&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Git</title><link>https://0x3ea.cn/posts/git/</link><pubDate>Sun, 05 Apr 2026 00:04:24 +0800</pubDate><guid>https://0x3ea.cn/posts/git/</guid><description>&lt;p&gt;本文记录 Git 常用操作，按学习路径组织：基础概念 → 基础配置 → 分支操作 → 远程协作 → 高级操作。&lt;/p&gt;
 &lt;h1 id="基础概念"&gt;基础概念&lt;/h1&gt;
 &lt;h2 id="工作区暂存区本地仓库"&gt;工作区、暂存区、本地仓库&lt;/h2&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;编辑文件（工作区） ──→ git add ──→ 暂存区 ──→ git commit ──→ 本地仓库
@@ -233,7 +233,7 @@
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 当前分支重命名为 main&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git branch -M main
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="worktree"&gt;worktree&lt;/h2&gt;
-&lt;p&gt;从同一仓库同时检出多个分支到不同目录。&lt;/p&gt;</description></item><item><title>Linux 常用命令</title><link>https://0x3ea.github.io/posts/linux/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/posts/linux/</guid><description>&lt;h2 id="日志查看"&gt;日志查看&lt;/h2&gt;
+&lt;p&gt;从同一仓库同时检出多个分支到不同目录。&lt;/p&gt;</description></item><item><title>Linux 常用命令</title><link>https://0x3ea.cn/posts/linux/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.cn/posts/linux/</guid><description>&lt;h2 id="日志查看"&gt;日志查看&lt;/h2&gt;
 &lt;p&gt;假如日志是这样的：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;2026-04-14 19:36:47 | INFO | pool-2-COKRequestHandler-thread-26 | c.e.cok.joymeng.KSTask.KSTaskService-10 | KSTaskService | grantTaskReward success | 10223885000010 | taskId: 80000004 | originStatus: 2 | receiveWay: email&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;以下示例中的关键字请替换为自己日志中的实际内容。&lt;/p&gt;
@@ -248,7 +248,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep -B &lt;span class="m"&gt;3&lt;/span&gt; xxx filename &lt;span class="c1"&gt;# 显示匹配行上 3 行&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grep -A &lt;span class="m"&gt;3&lt;/span&gt; xxx filename &lt;span class="c1"&gt;# 显示匹配行下 3 行&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="文件权限"&gt;文件权限&lt;/h2&gt;
-&lt;p&gt;查看文件权限：&lt;code&gt;ls -l filename&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.github.io/posts/go/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/posts/go/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
+&lt;p&gt;查看文件权限：&lt;code&gt;ls -l filename&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Go-基本语法</title><link>https://0x3ea.cn/posts/go/go1/</link><pubDate>Mon, 30 Mar 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.cn/posts/go/go1/</guid><description>&lt;h1 id="基本类型"&gt;基本类型&lt;/h1&gt;
 &lt;table&gt;
  &lt;thead&gt;
  &lt;tr&gt;
@@ -314,7 +314,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;	&lt;span class="s2"&gt;&amp;#34;github.com/0x3ea/KeyForge/internal/encode&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;导入包时,实际上导入的是包的物理位置
-调用时,实际上调用的是 .go 文件里的 package 声明&lt;/p&gt;</description></item><item><title>2026牛客寒假算法基础集训营5</title><link>https://0x3ea.github.io/posts/2026%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A55/</link><pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.github.io/posts/2026%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A55/</guid><description>&lt;h1 id="b智乃的瓷砖"&gt;B.智乃的瓷砖&lt;/h1&gt;
+调用时,实际上调用的是 .go 文件里的 package 声明&lt;/p&gt;</description></item><item><title>2026牛客寒假算法基础集训营5</title><link>https://0x3ea.cn/posts/2026%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A55/</link><pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate><guid>https://0x3ea.cn/posts/2026%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A55/</guid><description>&lt;h1 id="b智乃的瓷砖"&gt;B.智乃的瓷砖&lt;/h1&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;solve&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;cin&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
