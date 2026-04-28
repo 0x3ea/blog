@@ -1,4 +1,4 @@
-baseurl: "https://0x3ea.github.io/"  # 更新为你的 GitHub Pages URL
+baseurl: "https://0x3ea.cn"  # 更新为你的 GitHub Pages URL
 languageCode: "en-us"
 title: "0x3ea's Hugo website"
 theme: "hugo-xmin"
