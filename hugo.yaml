@@ -1,6 +1,6 @@
-baseurl: "https://0x3ea.github.io/blog/"  # 更新为你的 GitHub Pages URL
+baseurl: "https://0x3ea.github.io/"  # 更新为你的 GitHub Pages URL
 languageCode: "en-us"
-title: "A minimal Hugo website"
+title: "0x3ea's Hugo website"
 theme: "hugo-xmin"
 googleAnalytics: ""
 disqusShortname: ""
