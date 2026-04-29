@@ -57,4 +57,4 @@ else
 fi
 
 echo "✅ 部署完成!"
-echo "🌐 访问 https://0x3ea.github.io/blog/"
+echo "🌐 访问 https://0x3ea.cn"
