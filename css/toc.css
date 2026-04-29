@@ -10,39 +10,15 @@
   width: 220px;
   max-height: calc(100vh - 8em);
   overflow-y: auto;
-  font-size: 0.85em;
-  line-height: 1.7;
-  padding: 1.2em 1em;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  animation: tocFadeIn 0.4s ease-out;
-}
-
-@keyframes tocFadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  font-size: 0.9em;
+  line-height: 1.6;
 }
 
 .toc-title {
-  font-size: 0.75em;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #888;
-  margin-bottom: 0.8em;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid transparent;
-  border-image: linear-gradient(to right, rgba(0, 112, 243, 0.3), transparent) 1;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #ddd;
 }
 
 .toc-sidebar #TableOfContents ul {
@@ -52,106 +28,40 @@
 }
 
 .toc-sidebar #TableOfContents ul ul {
-  padding-left: 0.8em;
-  position: relative;
-}
-
-.toc-sidebar #TableOfContents ul ul::before {
-  content: "";
-  position: absolute;
-  left: 0.1em;
-  top: 0;
-  bottom: 0.5em;
-  width: 1px;
-  background: rgba(0, 0, 0, 0.07);
+  padding-left: 1.2em;
 }
 
 .toc-sidebar #TableOfContents li {
-  margin: 0;
+  margin: 0.2em 0;
 }
 
 .toc-sidebar #TableOfContents a {
   text-decoration: none;
-  color: #666;
+  color: #555;
   display: block;
-  padding: 3px 6px 3px 12px;
-  border-radius: 4px;
-  position: relative;
+  padding: 2px 4px;
+  border-radius: 3px;
   transition: color 0.2s, background 0.2s;
-  font-size: 0.92em;
-}
-
-.toc-sidebar #TableOfContents > ul > li > a {
-  font-size: 1em;
-  font-weight: 500;
-  color: #444;
-}
-
-.toc-sidebar #TableOfContents ul ul ul a {
-  font-size: 0.88em;
-}
-
-.toc-sidebar #TableOfContents a::before {
-  content: "";
-  position: absolute;
-  left: 2px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #ccc;
-  transition: background 0.2s, transform 0.2s;
 }
 
 .toc-sidebar #TableOfContents a:hover {
   color: #333;
-  background: rgba(0, 0, 0, 0.03);
-}
-
-.toc-sidebar #TableOfContents a:hover::before {
-  background: #999;
-  transform: translateY(-50%) scale(1.3);
+  background: #f0f0f0;
 }
 
 .toc-sidebar #TableOfContents a.active {
   color: #0070f3;
-  background: rgba(0, 112, 243, 0.06);
-  font-weight: 500;
-}
-
-.toc-sidebar #TableOfContents a.active::before {
-  background: #0070f3;
-  width: 4px;
-  height: 4px;
-  border-radius: 1px;
-  transform: translateY(-50%) scale(1.4);
+  background: #eef6ff;
+  font-weight: 600;
 }
 
 /* Scrollbar for TOC */
 .toc-sidebar::-webkit-scrollbar {
-  width: 3px;
-}
-.toc-sidebar::-webkit-scrollbar-track {
-  background: transparent;
+  width: 4px;
 }
 .toc-sidebar::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-}
-.toc-sidebar::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-/* Push main content right to make room for sidebar */
-@media (min-width: 1201px) {
-  body:has(.toc-sidebar) main,
-  body:has(.toc-sidebar) .article-meta {
-    margin-left: 0;
-  }
-  body:has(.toc-sidebar) {
-    padding-left: 260px;
-  }
+  background: #ccc;
+  border-radius: 2px;
 }
 
 /* Hide when not enough space */
