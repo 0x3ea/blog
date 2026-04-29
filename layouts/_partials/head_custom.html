@@ -1,12 +1,12 @@
-<link rel="stylesheet" href="/blog/css/syntax.css">
-<link rel="stylesheet" href="/blog/css/toc.css">
-<link id="site-favicon" rel="icon" href="/blog/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/toc.css" | relURL }}">
+<link id="site-favicon" rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
 <script>
   (() => {
     const icons = [
-      "/blog/favicon.svg",
-      "/blog/favicon-two-black.svg",
-      "/blog/favicon-three-black.svg",
+      "{{ "favicon.svg" | relURL }}",
+      "{{ "favicon-two-black.svg" | relURL }}",
+      "{{ "favicon-three-black.svg" | relURL }}",
     ];
     const icon = icons[Math.floor(Math.random() * icons.length)];
     document.getElementById("site-favicon").href = `${icon}?v=${Date.now()}`;
