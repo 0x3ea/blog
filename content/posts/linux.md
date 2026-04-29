@@ -7,7 +7,6 @@ tags:
   - Linux
 ---
 
-
 ## 日志查看
 
 假如日志是这样的：
@@ -24,17 +23,19 @@ tags:
 
 `awk -F '|' '/10223885000010/ && /grantTaskReward success/ {print $6, $7, $8}' smartfox.log.2026-04-14*`
 
-查看最近 100 条命令：`history 100`
-
-获取文件的绝对路径：`realpath filename`
-
-查看grep关键字附近: 
+查看 `grep` 关键字附近的内容：
 
 ```bash
 grep -C 3 xxx filename # 显示匹配行上下各 3 行
 grep -B 3 xxx filename # 显示匹配行上 3 行
 grep -A 3 xxx filename # 显示匹配行下 3 行
 ```
+
+## 常用辅助命令
+
+查看最近 100 条命令：`history 100`
+
+获取文件的绝对路径：`realpath filename`
 
 ## 文件权限
 
@@ -54,8 +55,8 @@ Linux 的文件权限分为读、写、执行，分别对应 r、w、x。
 
 Linux 提供了两种表示文件权限的格式：
 
-1. 基础权限：三个属组的每组权限各占三个比特位，可简化为三个八进制数字（如 `755`）
-2. 完整权限：特殊权限 + 三个属组权限，可简化为四个八进制数字（如 `4755`）
+1. 基础权限：所有者、所属组、其他用户三类权限各占三个比特位，可简化为三个八进制数字（如 `755`）。
+2. 完整权限：特殊权限 + 基础权限，可简化为四个八进制数字（如 `4755`）。
 
 ```
 -rwxr-xr-x
@@ -68,10 +69,28 @@ Linux 提供了两种表示文件权限的格式：
 
 当特殊权限位生效时，对应的 `x` 会被替换为其他字符：
 
-- SUID 生效时，所有者的 `x` 显示为 `s`（如 `-rwsr-xr-x`，对应 `4755`）
-- SGID 生效时，所属组的 `x` 显示为 `s`（如 `-rwxr-sr-x`，对应 `2755`）
-- Sticky 生效时，其他用户的 `x` 显示为 `t`（如 `drwxrwxrwt`，对应 `/tmp` 的 `1777`）
+- SUID 生效时，所有者的 `x` 显示为 `s`（如 `-rwsr-xr-x`，对应 `4755`）。
+- SGID 生效时，所属组的 `x` 显示为 `s`（如 `-rwxr-sr-x`，对应 `2755`）。
+- Sticky 生效时，其他用户的 `x` 显示为 `t`（如 `drwxrwxrwt`，对应 `/tmp` 的 `1777`）。
 
-修改权限：`chmod +x filename`
+```bash
+chmod u+x filename  # 给当前用户添加执行权限
+chmod +x filename   # 给可执行文件添加执行权限
+chmod 755 filename  # 设置基础权限
+chmod 4755 filename # 设置 SUID + 755
+```
 
 修改文件所有者：`chown user:group filename`
+
+## 压缩与解压
+
+解压文件：
+
+```bash
+tar -xzf archive.tar.gz -C /path/to/destination
+```
+
+- `-x`：extract，解压。
+- `-z`：通过 gzip 处理 `.gz` 文件。
+- `-f`：指定归档文件名，后面紧跟文件名。
+- `-C`：切换目标目录；目录不存在会报错，需要先 `mkdir -p`。
