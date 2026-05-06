@@ -94,3 +94,10 @@ tar -xzf archive.tar.gz -C /path/to/destination
 - `-z`：通过 gzip 处理 `.gz` 文件。
 - `-f`：指定归档文件名，后面紧跟文件名。
 - `-C`：切换目标目录；目录不存在会报错，需要先 `mkdir -p`。
+
+
+查看文件大小
+
+```bash
+ls -lh filename
+```
