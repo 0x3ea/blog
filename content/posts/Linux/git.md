@@ -69,6 +69,8 @@ git branch --all
 git branch -d main
 # 查看分支跟踪的远程分支
 git branch -vv
+# 删除远程分支
+git push origin --delete xxx
 ```
 
 ## worktree
