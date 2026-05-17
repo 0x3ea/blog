@@ -84,6 +84,15 @@ chmod 4755 filename # 设置 SUID + 755
 
 ## 压缩与解压
 
+压缩文件:
+
+```shell
+tar -czf archive.tar.gz file1 file2
+```
+- `-c`：创建(Create)一个新的归档文件
+- `-z`：在打包的同时，使用 gzip 程序(gZip)进行压缩
+- `-f`：代表指定文件名(File)
+
 解压文件：
 
 ```bash

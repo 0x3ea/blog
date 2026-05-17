@@ -29,14 +29,46 @@ git config --global core.editor vim           # vim
 git config --global core.editor nano          # nano（更简单）
 git config --global core.editor "code --wait" # VSCode
 ```
+# submodule
+
+如果项目需要其他仓库,可以使用 `submodule` 来管理
+
+父仓库的 `commit` 直接指向子模块仓库的一个特定 `commit`
+```shell
+git submodule add <Remote URL> Target Path
+```
+`commit/push` 都需要先子模块,再父仓库
 
 # 分支操作
+
+## 特殊引用
+
+引用	含义	更新时机
+HEAD	当前分支的当前位置	每次都更新
+ORIG_HEAD	危险操作前 HEAD 的位置	merge/rebase/reset/pull 时
+FETCH_HEAD	最近 fetch 的分支信息	git fetch 时
+MERGE_HEAD	正在合并的另一个分支	git merge 时
+REBASE_HEAD	rebase 正在进行的提交	git rebase 时
+
+查看这些引用
+
+```shell
+git show ORIG_HEAD --oneline
+```
 
 ## branch
 
 ```bash
+# 创建名为 main 的分支
+git branch main
 # 当前分支重命名为 main
 git branch -M main
+# 查看该仓库的所有分支
+git branch --all
+# 删除分支
+git branch -d main
+# 查看分支跟踪的远程分支
+git branch -vv
 ```
 
 ## worktree
@@ -68,8 +100,41 @@ git worktree remove ../hotfix
 ## 关联远程仓库
 
 ```bash
+# 关联远程仓库
 git remote add origin https://github.com/0x3ea/xxx.git
+# 查看当前关联仓库
+git remote -v
+# 重新关联origin
+git remote set-url origin git@github.com:private/repo.git
 ```
+## 上传
+
+把本地仓库的所有分支上传到远程仓库,并创建 `upstream`
+```bash
+git push -u origin --all
+```
+
+## upstream/tracking
+
+本地分支默认对应的远程分支
+
+比如本地有一个 `main` 分支,远程有一个 `origin/main` 分支
+
+如果本地 `main` 设置了 `upstream` 为 `origin/main``，Git` 就知道当前本地 `main` 默认是和远程的 `origin/main` 对应的。
+
+这样在 `main` 分支上就可以直接运行：
+
+```bash
+git pull
+git push
+```
+而不用每次都写：
+```bash
+git pull origin main
+git push origin main
+```
+本地分支设置 `upstream` 后,它就 `tracking` 某个远程分支
+
 
 ## 同步
 
@@ -90,6 +155,12 @@ git log --graph          # 用 ASCII 字符画出分支合并图
 git pull origin main     # fetch origin main 后合并到当前分支
 git merge origin/main    # 合并远程跟踪分支 origin/main
 # 注意 merge 的时候要让本地和远程分支对应
+```
+
+同步分支
+```bash
+# 把 commit 同步到当前分支
+git cherry-pick f9437d4
 ```
 
 ## stash
@@ -169,6 +240,13 @@ commit ID  (代码提交作者  提交时间  代码位于文件中的行数)  �
 
 # 修改历史
 
+## 修改commit message
+
+修改最近一次提交
+```shell
+git commit --amend -m "new commit message"
+```
+
 ## 删除历史中的敏感文件
 
 如果误提交了密钥、大文件或不应进入仓库的文件，可以重写历史。
@@ -191,8 +269,13 @@ git filter-branch --force \
 
 当远程有了新的提交，本地也有提交时，Git 会拒绝 push，因为当前分支落后于远程，需要先同步。
 
+`git rebase origin main` 将当前分支的提交，以远程仓库的 origin/main 分支（本地存储的远程跟踪分支）作为新的基底，重新应用
+
 ```bash
 git pull --rebase origin main
+# 跟上面等效
+git fetch origin main
+git rebase origin/main
 ```
 
 # 发布管理
