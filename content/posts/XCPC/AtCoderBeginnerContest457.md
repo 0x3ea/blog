@@ -1,8 +1,7 @@
 ---
-date: '2026-05-10T13:54:50+08:00'
+date: '2026-05-09T13:54:50+08:00'
 title: 'AtCoder Beginner Contest4 57'
-categories:
-    - XCPC
+categories: XCPC
 tags:
 ---
 
@@ -108,7 +107,7 @@ func solve(in *FastScanner, out *bufio.Writer) {
 }
 ```
 
-# E - Crossing Table Cloth 
+# E - Crossing Table Cloth
 
 ```Go
 func solve(in *FastScanner, out *bufio.Writer) {
